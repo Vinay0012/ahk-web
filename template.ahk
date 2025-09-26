@@ -8,16 +8,16 @@
 ^!n:: {  ; Ctrl+Alt+N for NIFTY
 
 	accounts := [
-		{ id: "{{ID1}}", qty: "375" },
-		{ id: "{{ID2}}", qty: "375" },
-		{ id: "{{ID3}}", qty: "225" },
-		{ id: "{{ID4}}", qty: "150" },
-		{ id: "{{ID5}}", qty: "150" },
-		{ id: "{{ID6}}", qty: "150" },
-		{ id: "{{ID7}}", qty: "75" },
-		{ id: "{{ID8}}", qty: "75" },
-		{ id: "{{ID9}}", qty: "75" },
-		{ id: "{{ID10}}", qty: "75" }
+		{ id: "ahk_id {{ID1}}", qty: "375" },
+		{ id: "ahk_id {{ID2}}", qty: "375" },
+		{ id: "ahk_id {{ID3}}", qty: "225" },
+		{ id: "ahk_id {{ID4}}", qty: "150" },
+		{ id: "ahk_id {{ID5}}", qty: "150" },
+		{ id: "ahk_id {{ID6}}", qty: "150" },
+		{ id: "ahk_id {{ID7}}", qty: "75" },
+		{ id: "ahk_id {{ID8}}", qty: "75" },
+		{ id: "ahk_id {{ID9}}", qty: "75" },
+		{ id: "ahk_id {{ID10}}", qty: "75" }
 	]
 
 	number 	  := InputBox("Enter the Number of trades:", "Trade Setup").Value
@@ -343,16 +343,16 @@
 ^!b:: {  ; Ctrl+Alt+B
 
 	accounts := [
-		{ id: "{{ID1}}", qty: "35" },
-		{ id: "{{ID2}}", qty: "35" },
-		{ id: "{{ID3}}", qty: "35" },
-		{ id: "{{ID4}}", qty: "35" },
-		{ id: "{{ID5}}", qty: "35" },
-		{ id: "{{ID6}}", qty: "35" },
-		{ id: "{{ID7}}", qty: "35" },
-		{ id: "{{ID8}}", qty: "35" },
-		{ id: "{{ID9}}", qty: "35" },
-		{ id: "{{ID10}}", qty: "35" }
+		{ id: "ahk_id {{ID1}}", qty: "35" },
+		{ id: "ahk_id {{ID2}}", qty: "35" },
+		{ id: "ahk_id {{ID3}}", qty: "35" },
+		{ id: "ahk_id {{ID4}}", qty: "35" },
+		{ id: "ahk_id {{ID5}}", qty: "35" },
+		{ id: "ahk_id {{ID6}}", qty: "35" },
+		{ id: "ahk_id {{ID7}}", qty: "35" },
+		{ id: "ahk_id {{ID8}}", qty: "35" },
+		{ id: "ahk_id {{ID9}}", qty: "35" },
+		{ id: "ahk_id {{ID10}}", qty: "35" }
 	]
 
 	; Enter number of trades
@@ -685,16 +685,16 @@
 ^!i:: {
 
 accounts := [
-		{ id: "{{ID1}}", qty: "375" },
-		{ id: "{{ID2}}", qty: "375" },
-		{ id: "{{ID3}}", qty: "225" },
-		{ id: "{{ID4}}", qty: "150" },
-		{ id: "{{ID5}}", qty: "150" },
-		{ id: "{{ID6}}", qty: "150" },
-		{ id: "{{ID7}}", qty: "75" },
-		{ id: "{{ID8}}", qty: "75" },
-		{ id: "{{ID9}}", qty: "75" },
-		{ id: "{{ID10}}", qty: "75" }
+		{ id: "ahk_id {{ID1}}", qty: "375" },
+		{ id: "ahk_id {{ID2}}", qty: "375" },
+		{ id: "ahk_id {{ID3}}", qty: "225" },
+		{ id: "ahk_id {{ID4}}", qty: "150" },
+		{ id: "ahk_id {{ID5}}", qty: "150" },
+		{ id: "ahk_id {{ID6}}", qty: "150" },
+		{ id: "ahk_id {{ID7}}", qty: "75" },
+		{ id: "ahk_id {{ID8}}", qty: "75" },
+		{ id: "ahk_id {{ID9}}", qty: "75" },
+		{ id: "ahk_id {{ID10}}", qty: "75" }
 	]
 
 	for account in accounts
@@ -712,16 +712,16 @@ accounts := [
 ^!c:: {
 
 accounts := [
-		{ id: "{{ID1}}", qty: "375" },
-		{ id: "{{ID2}}", qty: "375" },
-		{ id: "{{ID3}}", qty: "225" },
-		{ id: "{{ID4}}", qty: "150" },
-		{ id: "{{ID5}}", qty: "150" },
-		{ id: "{{ID6}}", qty: "150" },
-		{ id: "{{ID7}}", qty: "75" },
-		{ id: "{{ID8}}", qty: "75" },
-		{ id: "{{ID9}}", qty: "75" },
-		{ id: "{{ID10}}", qty: "75" }
+		{ id: "ahk_id {{ID1}}", qty: "375" },
+		{ id: "ahk_id {{ID2}}", qty: "375" },
+		{ id: "ahk_id {{ID3}}", qty: "225" },
+		{ id: "ahk_id {{ID4}}", qty: "150" },
+		{ id: "ahk_id {{ID5}}", qty: "150" },
+		{ id: "ahk_id {{ID6}}", qty: "150" },
+		{ id: "ahk_id {{ID7}}", qty: "75" },
+		{ id: "ahk_id {{ID8}}", qty: "75" },
+		{ id: "ahk_id {{ID9}}", qty: "75" },
+		{ id: "ahk_id {{ID10}}", qty: "75" }
 	]
 
 	for account in accounts
