@@ -1,24 +1,24 @@
-﻿; AutoHotkey v2 script for ODIN Options Order Entry (interactive, auto-select scrip, no submit)
+; AutoHotkey v2 script for ODIN Options Order Entry (interactive, auto-select scrip, no submit)
 #SingleInstance Force
-
-accounts := [
-	{ id: "{{ID1}}", qty: "375" },
-	{ id: "{{ID2}}", qty: "375" },
-	{ id: "{{ID3}}", qty: "225" },
-	{ id: "{{ID4}}", qty: "150" },
-	{ id: "{{ID5}}", qty: "150" },
-	{ id: "{{ID6}}", qty: "150" },
-	{ id: "{{ID7}}", qty: "75" },
-	{ id: "{{ID8}}", qty: "75" },
-	{ id: "{{ID9}}", qty: "75" },
-	{ id: "{{ID10}}", qty: "75" }
-]
 
 MsgBox("Your free trial has ended. Thank you for using the product.")
 return
 
 ; --- Hotkey to trigger ---
 ^!n:: {  ; Ctrl+Alt+N for NIFTY
+
+	accounts := [
+		{ id: "{{ID1}}", qty: "375" },
+		{ id: "{{ID2}}", qty: "375" },
+		{ id: "{{ID3}}", qty: "225" },
+		{ id: "{{ID4}}", qty: "150" },
+		{ id: "{{ID5}}", qty: "150" },
+		{ id: "{{ID6}}", qty: "150" },
+		{ id: "{{ID7}}", qty: "75" },
+		{ id: "{{ID8}}", qty: "75" },
+		{ id: "{{ID9}}", qty: "75" },
+		{ id: "{{ID10}}", qty: "75" }
+	]
 
 	number 	  := InputBox("Enter the Number of trades:", "Trade Setup").Value
 	if (number < "1" && number > "2")
@@ -341,6 +341,19 @@ return
 }
 
 ^!b:: {  ; Ctrl+Alt+B
+
+	accounts := [
+		{ id: "{{ID1}}", qty: "35" },
+		{ id: "{{ID2}}", qty: "35" },
+		{ id: "{{ID3}}", qty: "35" },
+		{ id: "{{ID4}}", qty: "35" },
+		{ id: "{{ID5}}", qty: "35" },
+		{ id: "{{ID6}}", qty: "35" },
+		{ id: "{{ID7}}", qty: "35" },
+		{ id: "{{ID8}}", qty: "35" },
+		{ id: "{{ID9}}", qty: "35" },
+		{ id: "{{ID10}}", qty: "35" }
+	]
 
 	; Enter number of trades
 	number 	  := InputBox("Enter the Number of trades:", "Trade Setup").Value
