@@ -11,7 +11,7 @@ const app = express();
 const upload = multer(); // handles multipart/form-data
 
 // serve static files (your index6.html should be inside public folder)
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static("public"));
 
 // route for form submission
 app.post("/generate", upload.none(), (req, res) => {
