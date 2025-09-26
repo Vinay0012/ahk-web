@@ -30,7 +30,7 @@ app.post("/generate", upload.none(), async (req, res) => {
     const filename = `generated_${Date.now()}.ahk`;
 
     // 2. Upload .ahk to GitHub
-    const repo = "YOUR_USERNAME/YOUR_REPO"; // 🔹 change
+    const repo = "Vinay0012/office"; // 🔹 change
     const branch = "main";
     const apiUrl = `https://api.github.com/repos/${repo}/contents/scripts/${filename}`;
 
