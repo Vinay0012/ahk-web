@@ -29,8 +29,10 @@ app.post("/generate", upload.none(), (req, res) => {
 
   // replace placeholders {{ID1}}, {{ID2}}, ...
   ids.forEach((id, index) => {
-    template = template.replace(`{{ID${index + 1}}}`, id);
+    const regex = new RegExp(`{{ID${index + 1}}}`, "g");
+    template = template.replace(regex, id);
   });
+
 
   // write new script
   const outputDir = path.join(__dirname, "output");
