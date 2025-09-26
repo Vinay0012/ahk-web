@@ -11,7 +11,7 @@ const app = express();
 const upload = multer(); // handles multipart/form-data
 
 // serve static files (your index6.html should be inside public folder)
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 
 // route for form submission
 app.post("/generate", upload.none(), (req, res) => {
@@ -46,7 +46,8 @@ app.post("/generate", upload.none(), (req, res) => {
 });
 
 // start server
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
+
