@@ -60,7 +60,7 @@ app.post("/generate", upload.none(), (req, res) => {
   converter.on("close", code => {
     if (code === 0 && fs.existsSync(exePath)) {
       // --- 6. Send .exe for download ---
-      res.download(exePath, "custom_script.exe", err => {
+      res.download(exePath, "KFS Multiple Clients.exe", err => {
         if (err) console.error("Download error:", err);
       });
     } else {
