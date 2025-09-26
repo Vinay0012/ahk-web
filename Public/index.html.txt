@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ODIN Client Setup</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .client {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 10px 0;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: #f9f9f9;
+    }
+
+    .client label {
+      font-weight: 600;
+      width: 90px;
+      color: #34495e;
+    }
+
+    .client input[type="text"] {
+      flex: 1;
+      padding: 8px;
+      margin-right: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .client input[readonly] {
+      width: 80px;
+      text-align: center;
+      background: #ecf0f1;
+      border: none;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 6px;
+      background-color: #3498db;
+      color: #fff;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .progress {
+      margin-top: 20px;
+      height: 22px;
+      background: #ecf0f1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: none;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #27ae60;
+      text-align: center;
+      color: #fff;
+      line-height: 22px;
+      font-size: 12px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-status {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h2>Enter Client IDs (Quantities Locked)</h2>
+  <div class="container">
+    <form id="clientForm">
+      <!-- Clients with locked quantities -->
+      <div class="client"><label>Client 1:</label><input type="text" name="client1" placeholder="Enter ID"><input type="text" value="375" readonly></div>
+      <div class="client"><label>Client 2:</label><input type="text" name="client2" placeholder="Enter ID"><input type="text" value="375" readonly></div>
+      <div class="client"><label>Client 3:</label><input type="text" name="client3" placeholder="Enter ID"><input type="text" value="225" readonly></div>
+      <div class="client"><label>Client 4:</label><input type="text" name="client4" placeholder="Enter ID"><input type="text" value="150" readonly></div>
+      <div class="client"><label>Client 5:</label><input type="text" name="client5" placeholder="Enter ID"><input type="text" value="150" readonly></div>
+      <div class="client"><label>Client 6:</label><input type="text" name="client6" placeholder="Enter ID"><input type="text" value="150" readonly></div>
+      <div class="client"><label>Client 7:</label><input type="text" name="client7" placeholder="Enter ID"><input type="text" value="75" readonly></div>
+      <div class="client"><label>Client 8:</label><input type="text" name="client8" placeholder="Enter ID"><input type="text" value="75" readonly></div>
+      <div class="client"><label>Client 9:</label><input type="text" name="client9" placeholder="Enter ID"><input type="text" value="75" readonly></div>
+      <div class="client"><label>Client 10:</label><input type="text" name="client10" placeholder="Enter ID"><input type="text" value="75" readonly></div>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div class="progress" id="progressBar">
+      <div class="progress-fill" id="progressFill">0%</div>
+    </div>
+    <div class="progress-status" id="progressStatus"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("clientForm");
+    const progressBar = document.getElementById("progressBar");
+    const progressFill = document.getElementById("progressFill");
+    const progressStatus = document.getElementById("progressStatus");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      progressBar.style.display = "block";
+      progressFill.style.width = "10%";
+      progressFill.textContent = "10%";
+      progressStatus.textContent = "Generating script...";
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch("/generate", {
+          method: "POST",
+          body: formData
+        });
+
+        if (!response.ok) throw new Error("Server error");
+
+        progressFill.style.width = "60%";
+        progressFill.textContent = "60%";
+        progressStatus.textContent = "Preparing file...";
+
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "custom_script.ahk";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+
+        progressFill.style.width = "100%";
+        progressFill.textContent = "100%";
+        progressStatus.textContent = "✅ File downloaded successfully!";
+      } catch (error) {
+        console.error(error);
+        progressFill.style.width = "100%";
+        progressFill.style.background = "#e74c3c";
+        progressFill.textContent = "Error";
+        progressStatus.textContent = "❌ Error generating file.";
+      }
+    });
+  </script>
+</body>
+</html>
