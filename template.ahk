@@ -61,9 +61,9 @@
 				Sleep (100)
 		
 				Send("{F5}")
-				Sleep (100)
-				Send("{Tab}")
 				Sleep (300)
+				Send("{Tab}")
+				Sleep (100)
 		
 				if(expiry > 0)
 				{
@@ -71,7 +71,7 @@
 					{
 						Sleep (100)
 						Send("{Down}")
-						Sleep (100)
+						Sleep (200)
 						Send("+{Tab}")
 						Sleep (100)
 					}
@@ -112,14 +112,14 @@
 				Sleep (100)
 
 				Send(price)
-				Sleep (300)
+				Sleep (100)
 		
-				; Send("{Enter}")
-				; Sleep(300)
-				; Send("Y")
-				; Sleep(200)
-				; Send("Y")
-				; Sleep(300)
+				Send("{Enter}")
+				Sleep(300)
+				Send("Y")
+				Sleep(200)
+				Send("Y")
+				Sleep(300)
 			}
 		}
 	}
@@ -127,44 +127,44 @@
 	else if (number = "2")
 	{
 		; symbol    := InputBox("Enter Symbol (NIFTY or BANKNIFTY):", "Trade Setup").Value
-		expiry    := InputBox("Enter Expiry (eg. 0 for current, etc):", "Trade Setup").Value
-		strike    := InputBox("Enter Strike Price (eg. 25200):", "Trade Setup").Value
-		optType   := InputBox("Enter Option Type (C or P):", "Trade Setup").Value
+		expiry    := InputBox("Enter 1st Trade Expiry (eg. 0 for current, etc):", "Trade Setup").Value
+		strike    := InputBox("Enter 1st Trade Strike Price (eg. 25200):", "Trade Setup").Value
+		optType   := InputBox("Enter 1st Trade Option Type (C or P):", "Trade Setup").Value
 		if (optType != "C" && optType != "CE" && optType != "P" && optType != "PE")
 		{
 			MsgBox("Invalid Option Type.")
 			Sleep(1000)
 			return
 		}
-		price     := InputBox("Enter Price:", "Trade Setup").Value
-		orderType := InputBox("Enter Order Type (B or S):", "Trade Setup").Value
+		price     := InputBox("Enter 1st Trade Price:", "Trade Setup").Value
+		orderType := InputBox("Enter 1st Trade Order Type (B or S):", "Trade Setup").Value
 		if (orderType != "B" && orderType != "S" && orderType != "BUY" && orderType != "SELL")
 		{
 			MsgBox("Invalid Order Type.")
 			Sleep(1000)
 			return
 		}
-		multiplier := InputBox("Enter the Quantity Multiplier:", "Trade Setup").Value
+		multiplier := InputBox("Enter 1st Trade Quantity Multiplier:", "Trade Setup").Value
 		
 		; --- Details for the 2nd trade ---
-		expiry2	   := InputBox("Enter Expiry (eg. 0 for current, etc):", "Trade Setup").Value
-		strike2    := InputBox("Enter Strike Price (eg. 25000):", "Trade Setup").Value
-		optType2   := InputBox("Enter Option Type (C or P):", "Trade Setup").Value
+		expiry2	   := InputBox("Enter 2nd Trade Expiry (eg. 0 for current, etc):", "Trade Setup").Value
+		strike2    := InputBox("Enter 2nd Trade Strike Price (eg. 25000):", "Trade Setup").Value
+		optType2   := InputBox("Enter 2nd Trade Option Type (C or P):", "Trade Setup").Value
 		if (optType2 != "C" && optType2 != "CE" && optType2 != "P" && optType2 != "PE")
 		{
 			MsgBox("Invalid Option Type.")
 			Sleep(1000)
 			return
 		}
-		price2     := InputBox("Enter Price:", "Trade Setup").Value
-		orderType2 := InputBox("Enter Order Type (B or S):", "Trade Setup").Value
+		price2     := InputBox("Enter 2nd Trade Price:", "Trade Setup").Value
+		orderType2 := InputBox("Enter 2nd Trade Order Type (B or S):", "Trade Setup").Value
 		if (orderType2 != "B" && orderType2 != "S" && orderType2 != "BUY" && orderType2 != "SELL")
 		{
 			MsgBox("Invalid Order Type.")
 			Sleep(1000)
 			return
 		}
-		multiplier2 := InputBox("Enter the Quantity Multiplier:", "Trade Setup").Value
+		multiplier2 := InputBox("Enter 2nd Trade Quantity Multiplier:", "Trade Setup").Value
 
 		; --- Loop through accounts ---
 		for account in accounts {
@@ -180,9 +180,9 @@
 			
 				; --- Step 2: Open F5
 				Send("{F5}")
-				Sleep (100)
-				Send("{Tab}")
 				Sleep (300)
+				Send("{Tab}")
+				Sleep (100)
 			
 				if(expiry > 0)
 				{
@@ -190,7 +190,7 @@
 					{
 						Sleep (100)
 						Send("{Down}")
-						Sleep (100)
+						Sleep (200)
 						Send("+{Tab}")
 						Sleep (100)
 					}
@@ -234,7 +234,7 @@
 				Sleep (100)
 
 				Send(price)
-				Sleep (300)
+				Sleep (100)
 			
 				Send("{Enter}")
 				Sleep(300)
@@ -243,7 +243,7 @@
 				Send("Y")
 				Sleep(300)
 				
-				; Sleep(2000)
+				Sleep(1000)
 				
 				Send("{Esc}")
 				Sleep(100)
@@ -260,7 +260,7 @@
 			
 				; --- Step 2: Open F5
 				Send("{F5}")
-				Sleep (100)
+				Sleep (300)
 				Send("{Tab}")
 				Sleep (100)
 			
@@ -270,7 +270,7 @@
 					{
 						Sleep (100)
 						Send("{Down}")
-						Sleep (100)
+						Sleep (200)
 						Send("+{Tab}")
 						Sleep (100)
 					}
@@ -314,7 +314,7 @@
 				Sleep (100)
 
 				Send(price2)
-				Sleep (300)
+				Sleep (100)
 			
 				Send("{Enter}")
 				Sleep(300)
@@ -337,8 +337,9 @@
 			Send("{Esc}")
 			Sleep(100)
 			Send("{Esc}")
-			Sleep (300)
+			Sleep (100)
 			Send("!{F6}")
+			Sleep (300)
 		}
 	}
 }
@@ -349,7 +350,7 @@
 		{ id: "ahk_id {{ID1}}", qty: "35" },
 		{ id: "ahk_id {{ID2}}", qty: "35" },
 		{ id: "ahk_id {{ID3}}", qty: "35" },
-		{ id: "ahk_id {{ID4}}", qty: "175" },
+		{ id: "ahk_id {{ID4}}", qty: "35" },
 		{ id: "ahk_id {{ID5}}", qty: "35" },
 		{ id: "ahk_id {{ID6}}", qty: "35" },
 		{ id: "ahk_id {{ID7}}", qty: "35" },
@@ -370,7 +371,7 @@
 		; --- Ask user for trade details ---
 		; symbol    := InputBox("Enter Symbol (NIFTY or BANKNIFTY):", "Trade Setup").Value
 		expiry    := InputBox("Enter Expiry (eg. 0 for current, etc):", "Trade Setup").Value
-		strike    := InputBox("Enter Strike Price (eg. 25500):", "Trade Setup").Value
+		strike    := InputBox("Enter Strike Price (eg. 54000):", "Trade Setup").Value
 		optType   := InputBox("Enter Option Type (C or P):", "Trade Setup").Value
 		if (optType != "C" && optType != "CE" && optType != "P" && optType != "PE")
 		{
@@ -402,9 +403,9 @@
 			
 				; --- Step 2: Open F5
 				Send("{F5}")
-				Sleep (100)
-				Send("{Tab}")
 				Sleep (300)
+				Send("{Tab}")
+				Sleep (100)
 			
 				if(expiry > 0)
 				{
@@ -412,7 +413,7 @@
 					{
 						Sleep (100)
 						Send("{Down}")
-						Sleep (100)
+						Sleep (200)
 						Send("+{Tab}")
 						Sleep (100)
 					}
@@ -456,7 +457,7 @@
 				Sleep (100)
 
 				Send(price)
-				Sleep (300)
+				Sleep (100)
 			
 				; Send("{Enter}")
 				; Sleep(300)
@@ -473,7 +474,7 @@
 		; --- Ask user for trade details ---
 		; symbol    := InputBox("Enter Symbol (NIFTY or BANKNIFTY):", "Trade Setup").Value
 		expiry    := InputBox("Enter 1st Trade Expiry (eg. 0 for current, etc):", "Trade Setup").Value
-		strike    := InputBox("Enter 1st Trade Strike Price (eg. 25500):", "Trade Setup").Value
+		strike    := InputBox("Enter 1st Trade Strike Price (eg. 54000):", "Trade Setup").Value
 		optType   := InputBox("Enter 1st Trade Option Type (C or P):", "Trade Setup").Value
 		if (optType != "C" && optType != "CE" && optType != "P" && optType != "PE")
 		{
@@ -493,7 +494,7 @@
 		
 		; --- Details for the 2nd trade ---
 		expiry2	   := InputBox("Enter 2nd Trade Expiry (eg. 0 for current, etc):", "Trade Setup").Value
-		strike2    := InputBox("Enter 2nd Trade Strike Price (eg. 25000):", "Trade Setup").Value
+		strike2    := InputBox("Enter 2nd Trade Strike Price (eg. 54000):", "Trade Setup").Value
 		optType2   := InputBox("Enter 2nd Trade Option Type (C or P):", "Trade Setup").Value
 		if (optType2 != "C" && optType2 != "CE" && optType2 != "P" && optType2 != "PE")
 		{
@@ -501,7 +502,7 @@
 			Sleep(1000)
 			return
 		}
-		price2     := InputBox("Enter Price:", "Trade Setup").Value
+		price2     := InputBox("Enter 2nd Order Price:", "Trade Setup").Value
 		orderType2 := InputBox("Enter 2nd Order Type (B or S):", "Trade Setup").Value
 		if (orderType2 != "B" && orderType2 != "S" && orderType2 != "BUY" && orderType2 != "SELL")
 		{
@@ -509,7 +510,7 @@
 			Sleep(1000)
 			return
 		}
-		multiplier2 := InputBox("Enter the Quantity Multiplier:", "Trade Setup").Value
+		multiplier2 := InputBox("Enter 2nd Order Quantity Multiplier:", "Trade Setup").Value
 
 		; --- Loop through accounts ---
 		for account in accounts {
@@ -525,7 +526,7 @@
 			
 				; --- Step 2: Open F5
 				Send("{F5}")
-				Sleep (100)
+				Sleep (300)
 				Send("{Tab}")
 				Sleep (100)
 			
@@ -535,7 +536,7 @@
 					{
 						Sleep (100)
 						Send("{Down}")
-						Sleep (100)
+						Sleep (200)
 						Send("+{Tab}")
 						Sleep (100)
 					}
@@ -579,7 +580,7 @@
 				Sleep (100)
 
 				Send(price)
-				Sleep (300)
+				Sleep (100)
 			
 				Send("{Enter}")
 				Sleep(300)
@@ -588,7 +589,7 @@
 				Send("Y")
 				Sleep(300)
 				
-				; Sleep(2000)
+				Sleep(1000)
 				
 				Send("{Esc}")
 				Sleep(100)
@@ -605,7 +606,7 @@
 			
 				; --- Step 2: Open F5
 				Send("{F5}")
-				Sleep (100)
+				Sleep (300)
 				Send("{Tab}")
 				Sleep (100)
 			
@@ -615,7 +616,7 @@
 					{
 						Sleep (100)
 						Send("{Down}")
-						Sleep (100)
+						Sleep (200)
 						Send("+{Tab}")
 						Sleep (100)
 					}
@@ -659,7 +660,7 @@
 				Sleep (100)
 
 				Send(price2)
-				Sleep (300)
+				Sleep (100)
 			
 				Send("{Enter}")
 				Sleep(300)
@@ -682,8 +683,9 @@
 			Send("{Esc}")
 			Sleep(100)
 			Send("{Esc}")
-			Sleep (300)
+			Sleep (100)
 			Send("!{F6}")
+			Sleep(300)
 		}
 	} 
 }
@@ -709,8 +711,9 @@ accounts := [
 		{
 			Sleep (100)
 			WinActivate(account.id)
-			Sleep (200)
+			Sleep (100)
 			Send("!{F6}")
+			Sleep (300)
 		}
 	}
 }
