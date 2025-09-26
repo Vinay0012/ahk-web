@@ -1,8 +1,8 @@
 ; AutoHotkey v2 script for ODIN Options Order Entry (interactive, auto-select scrip, no submit)
 #SingleInstance Force
 
-MsgBox("Your free trial has ended. Thank you for using the product.")
-return
+; MsgBox("Your free trial has ended. Thank you for using the product.")
+; return
 
 ; --- Hotkey to trigger ---
 ^!n:: {  ; Ctrl+Alt+N for NIFTY
@@ -683,6 +683,20 @@ return
 }
 
 ^!i:: {
+
+accounts := [
+		{ id: "{{ID1}}", qty: "375" },
+		{ id: "{{ID2}}", qty: "375" },
+		{ id: "{{ID3}}", qty: "225" },
+		{ id: "{{ID4}}", qty: "150" },
+		{ id: "{{ID5}}", qty: "150" },
+		{ id: "{{ID6}}", qty: "150" },
+		{ id: "{{ID7}}", qty: "75" },
+		{ id: "{{ID8}}", qty: "75" },
+		{ id: "{{ID9}}", qty: "75" },
+		{ id: "{{ID10}}", qty: "75" }
+	]
+
 	for account in accounts
 	{
 		if WinExist(account.id)
@@ -696,6 +710,20 @@ return
 }
 
 ^!c:: {
+
+accounts := [
+		{ id: "{{ID1}}", qty: "375" },
+		{ id: "{{ID2}}", qty: "375" },
+		{ id: "{{ID3}}", qty: "225" },
+		{ id: "{{ID4}}", qty: "150" },
+		{ id: "{{ID5}}", qty: "150" },
+		{ id: "{{ID6}}", qty: "150" },
+		{ id: "{{ID7}}", qty: "75" },
+		{ id: "{{ID8}}", qty: "75" },
+		{ id: "{{ID9}}", qty: "75" },
+		{ id: "{{ID10}}", qty: "75" }
+	]
+
 	for account in accounts
 	{
 		if WinExist(account.id)
