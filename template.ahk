@@ -47,6 +47,7 @@
 			Sleep(1000)
 			return
 		}
+		multiplier := InputBox("Enter the Quantity Multiplier:", "Trade Setup").Value
 
 		; --- Loop through accounts ---
 		for account in accounts {
@@ -105,7 +106,7 @@
 				}
 				Sleep (500)
 		
-				Send(account.qty)  
+				Send(account.qty * multiplier)  
 				Sleep (100)
 				Send("{Tab}")
 				Sleep (100)
@@ -143,6 +144,7 @@
 			Sleep(1000)
 			return
 		}
+		multiplier := InputBox("Enter the Quantity Multiplier:", "Trade Setup").Value
 		
 		; --- Details for the 2nd trade ---
 		expiry2	   := InputBox("Enter Expiry (eg. 0 for current, etc):", "Trade Setup").Value
@@ -162,6 +164,7 @@
 			Sleep(1000)
 			return
 		}
+		multiplier2 := InputBox("Enter the Quantity Multiplier:", "Trade Setup").Value
 
 		; --- Loop through accounts ---
 		for account in accounts {
@@ -225,7 +228,7 @@
 
 				; --- Step 6: Fill quantity and price ---
             
-				Send(account.qty)  
+				Send(account.qty * multiplier)  
 				Sleep (100) ; account-specific quantity
 				Send("{Tab}")
 				Sleep (100)
@@ -305,7 +308,7 @@
 
 				; --- Step 6: Fill quantity and price ---
             
-				Send(account.qty)  
+				Send(account.qty * multiplier2)  
 				Sleep (100) ; account-specific quantity
 				Send("{Tab}")
 				Sleep (100)
@@ -346,7 +349,7 @@
 		{ id: "ahk_id {{ID1}}", qty: "35" },
 		{ id: "ahk_id {{ID2}}", qty: "35" },
 		{ id: "ahk_id {{ID3}}", qty: "35" },
-		{ id: "ahk_id {{ID4}}", qty: "35" },
+		{ id: "ahk_id {{ID4}}", qty: "175" },
 		{ id: "ahk_id {{ID5}}", qty: "35" },
 		{ id: "ahk_id {{ID6}}", qty: "35" },
 		{ id: "ahk_id {{ID7}}", qty: "35" },
@@ -383,6 +386,7 @@
 			Sleep(1000)
 			return
 		}
+		multiplier := InputBox("Enter the Quantity Multiplier:", "Trade Setup").Value
 
 		; --- Loop through accounts ---
 		for account in accounts {
@@ -446,7 +450,7 @@
 
 				; --- Step 6: Fill quantity and price ---
             
-				Send("35")  
+				Send(account.qty * multiplier)  
 				Sleep (100) ; account-specific quantity
 				Send("{Tab}")
 				Sleep (100)
@@ -485,6 +489,7 @@
 			Sleep(1000)
 			return
 		}
+		multiplier := InputBox("Enter the Quantity Multiplier:", "Trade Setup").Value
 		
 		; --- Details for the 2nd trade ---
 		expiry2	   := InputBox("Enter 2nd Trade Expiry (eg. 0 for current, etc):", "Trade Setup").Value
@@ -504,6 +509,7 @@
 			Sleep(1000)
 			return
 		}
+		multiplier2 := InputBox("Enter the Quantity Multiplier:", "Trade Setup").Value
 
 		; --- Loop through accounts ---
 		for account in accounts {
@@ -567,7 +573,7 @@
 
 				; --- Step 6: Fill quantity and price ---
             
-				Send("35")  
+				Send(account.qty * multiplier)  
 				Sleep (100) ; account-specific quantity
 				Send("{Tab}")
 				Sleep (100)
@@ -647,7 +653,7 @@
 
 				; --- Step 6: Fill quantity and price ---
             
-				Send("35")  
+				Send(account.qty * multiplier2)  
 				Sleep (100) ; account-specific quantity
 				Send("{Tab}")
 				Sleep (100)
