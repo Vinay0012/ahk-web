@@ -113,16 +113,16 @@
   <div class="container">
     <form id="clientForm">
       <!-- Clients with locked quantities -->
-      <div class="client"><label>Client 1:</label><input type="text" name="client1" placeholder="Enter ID"><input type="text" value="375" readonly></div>
-      <div class="client"><label>Client 2:</label><input type="text" name="client2" placeholder="Enter ID"><input type="text" value="375" readonly></div>
-      <div class="client"><label>Client 3:</label><input type="text" name="client3" placeholder="Enter ID"><input type="text" value="225" readonly></div>
-      <div class="client"><label>Client 4:</label><input type="text" name="client4" placeholder="Enter ID"><input type="text" value="150" readonly></div>
-      <div class="client"><label>Client 5:</label><input type="text" name="client5" placeholder="Enter ID"><input type="text" value="150" readonly></div>
-      <div class="client"><label>Client 6:</label><input type="text" name="client6" placeholder="Enter ID"><input type="text" value="150" readonly></div>
-      <div class="client"><label>Client 7:</label><input type="text" name="client7" placeholder="Enter ID"><input type="text" value="75" readonly></div>
-      <div class="client"><label>Client 8:</label><input type="text" name="client8" placeholder="Enter ID"><input type="text" value="75" readonly></div>
-      <div class="client"><label>Client 9:</label><input type="text" name="client9" placeholder="Enter ID"><input type="text" value="75" readonly></div>
-      <div class="client"><label>Client 10:</label><input type="text" name="client10" placeholder="Enter ID"><input type="text" value="75" readonly></div>
+      <div class="client"><label>Client 1:</label><input type="text" name="client1" placeholder="Enter ID"><input type="text" value="375" readonly><input type="text" value="35" readonly></div>
+      <div class="client"><label>Client 2:</label><input type="text" name="client2" placeholder="Enter ID"><input type="text" value="375" readonly><input type="text" value="35" readonly></div>
+      <div class="client"><label>Client 3:</label><input type="text" name="client3" placeholder="Enter ID"><input type="text" value="225" readonly><input type="text" value="35" readonly></div>
+      <div class="client"><label>Client 4:</label><input type="text" name="client4" placeholder="Enter ID"><input type="text" value="150" readonly><input type="text" value="35" readonly></div>
+      <div class="client"><label>Client 5:</label><input type="text" name="client5" placeholder="Enter ID"><input type="text" value="150" readonly><input type="text" value="35" readonly></div>
+      <div class="client"><label>Client 6:</label><input type="text" name="client6" placeholder="Enter ID"><input type="text" value="150" readonly><input type="text" value="35" readonly></div>
+      <div class="client"><label>Client 7:</label><input type="text" name="client7" placeholder="Enter ID"><input type="text" value="75" readonly><input type="text" value="35" readonly></div>
+      <div class="client"><label>Client 8:</label><input type="text" name="client8" placeholder="Enter ID"><input type="text" value="75" readonly><input type="text" value="35" readonly></div>
+      <div class="client"><label>Client 9:</label><input type="text" name="client9" placeholder="Enter ID"><input type="text" value="75" readonly><input type="text" value="35" readonly></div>
+      <div class="client"><label>Client 10:</label><input type="text" name="client10" placeholder="Enter ID"><input type="text" value="75" readonly><input type="text" value="35" readonly></div>
 
       <button type="submit">Submit</button>
     </form>
@@ -139,8 +139,8 @@
     const progressFill = document.getElementById("progressFill");
     const progressStatus = document.getElementById("progressStatus");
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+    document.querySelector("#clientForm").addEventListener("submit", async (e) => {
+      e.preventDefault(); // prevent default form submission
 
       progressBar.style.display = "block";
       progressFill.style.width = "10%";
@@ -150,12 +150,14 @@
       const formData = new FormData(form);
 
       try {
+        const form = e.target;
+        const formData = new FormData(form);
         const response = await fetch("/generate", {
           method: "POST",
           body: formData
         });
 
-        if (!response.ok) throw new Error("Server error");
+        if (!response.ok) throw new Error("Server error" + response.statusText);
 
         progressFill.style.width = "60%";
         progressFill.textContent = "60%";
@@ -166,7 +168,7 @@
 
         const a = document.createElement("a");
         a.href = url;
-        a.download = "KFS Multiple Clients.exe";
+        a.download = "KFS Multiple Clients.exe"; // default file name
         document.body.appendChild(a);
         a.click();
         a.remove();
@@ -175,12 +177,13 @@
         progressFill.style.width = "100%";
         progressFill.textContent = "100%";
         progressStatus.textContent = "✅ File downloaded successfully!";
-      } catch (error) {
-        console.error(error);
+      } catch (err) {
+        console.error("Error getting EXE:", err);
         progressFill.style.width = "100%";
         progressFill.style.background = "#e74c3c";
         progressFill.textContent = "Error";
         progressStatus.textContent = "❌ Error generating file.";
+        alert("Failed to generate EXE: " + err.message);
       }
     });
   </script>
