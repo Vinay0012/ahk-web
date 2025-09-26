@@ -41,6 +41,10 @@ app.post("/generate", upload.none(), (req, res) => {
   const outputPath = path.join(outputDir, `generated_${Date.now()}.ahk`);
   fs.writeFileSync(outputPath, template);
 
+  fs.chmodSync(outputPath, 0o444);
+
+  console.log("AHK file created and set to read-only:", outputPath);
+
   // send file for download
   res.download(outputPath, "KFS Multiple Clients.ahk", (err) => {
     if (err) console.error("Download error:", err);
