@@ -199,49 +199,48 @@
     const progressStatus = document.getElementById("progressStatus");
 
     form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+  e.preventDefault();
 
-      progressBar.style.display = "block";
-      progressFill.style.width = "10%";
-      progressFill.textContent = "10%";
-      progressStatus.textContent = "Generating script...";
+  progressBar.style.display = "block";
+  progressFill.style.width = "10%";
+  progressFill.textContent = "10%";
+  progressStatus.textContent = "Generating EXE...";
 
-      const formData = new FormData(form);
+  const formData = new FormData(form);
 
-      try {
-        const response = await fetch("/generate", {
-          method: "POST",
-          body: formData
-        });
+  try {
+    const response = await fetch("/generate", { method: "POST", body: formData });
 
-        if (!response.ok) throw new Error("Server error");
+    if (!response.ok) throw new Error("Server error");
 
-        progressFill.style.width = "60%";
-        progressFill.textContent = "60%";
-        progressStatus.textContent = "Preparing file...";
+    progressFill.style.width = "60%";
+    progressFill.textContent = "60%";
+    progressStatus.textContent = "Waiting for GitHub workflow...";
 
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
+    // The server sends the EXE directly
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
 
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "KFS Multiple Clients.ahk";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        window.URL.revokeObjectURL(url);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "KFS Multiple Clients.exe";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.URL.revokeObjectURL(url);
 
-        progressFill.style.width = "100%";
-        progressFill.textContent = "100%";
-        progressStatus.textContent = "✅ File downloaded successfully!";
-      } catch (error) {
-        console.error(error);
-        progressFill.style.width = "100%";
-        progressFill.style.background = "#e74c3c";
-        progressFill.textContent = "Error";
-        progressStatus.textContent = "❌ Error generating file.";
-      }
-    });
+    progressFill.style.width = "100%";
+    progressFill.textContent = "100%";
+    progressStatus.textContent = "✅ EXE downloaded successfully!";
+
+  } catch (error) {
+    console.error(error);
+    progressFill.style.width = "100%";
+    progressFill.style.background = "#e74c3c";
+    progressFill.textContent = "Error";
+    progressStatus.textContent = "❌ Error generating EXE.";
+  }
+});
   </script>
 </body>
 </html>
