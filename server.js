@@ -3,6 +3,7 @@ import multer from "multer";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { execSync } from "child_process";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,7 +20,7 @@ app.post("/generate", upload.none(), (req, res) => {
 
   // collect all client IDs
   const ids = [];
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= 21; i++) {
     ids.push(req.body[`client${i}`] || "");
   }
 
@@ -41,7 +42,7 @@ app.post("/generate", upload.none(), (req, res) => {
   const outputPath = path.join(outputDir, `generated_${Date.now()}.ahk`);
   fs.writeFileSync(outputPath, template);
 
-  fs.chmodSync(outputPath, 0o444);
+  execSync(`attrib +R "${outputPath}"`);
 
   console.log("AHK file created and set to read-only:", outputPath);
 
