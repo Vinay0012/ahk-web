@@ -19,7 +19,7 @@ app.post("/generate", upload.none(), (req, res) => {
 
   // collect all client IDs
   const ids = [];
-  for (let i = 1; i <= 21; i++) {
+  for (let i = 1; i <= 20; i++) {
     ids.push(req.body[`client${i}`] || "");
   }
 
