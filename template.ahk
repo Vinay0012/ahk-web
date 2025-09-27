@@ -14,20 +14,19 @@
 		{ id: "ahk_id {{ID5}}", qty: "1575" },
 		{ id: "ahk_id {{ID6}}", qty: "525" },
 		{ id: "ahk_id {{ID7}}", qty: "150" },
-		{ id: "ahk_id {{ID8}}", qty: "75" },
-		{ id: "ahk_id {{ID9}}", qty: "525" },
-		{ id: "ahk_id {{ID10}}", qty: "1050" },
-		{ id: "ahk_id {{ID11}}", qty: "2700" },
+		{ id: "ahk_id {{ID8}}", qty: "525" },
+		{ id: "ahk_id {{ID9}}", qty: "1050" },
+		{ id: "ahk_id {{ID10}}", qty: "2700" },
+		{ id: "ahk_id {{ID11}}", qty: "375" },
 		{ id: "ahk_id {{ID12}}", qty: "375" },
-		{ id: "ahk_id {{ID13}}", qty: "375" },
-		{ id: "ahk_id {{ID14}}", qty: "225" },
+		{ id: "ahk_id {{ID13}}", qty: "225" },
+		{ id: "ahk_id {{ID14}}", qty: "150" },
 		{ id: "ahk_id {{ID15}}", qty: "150" },
 		{ id: "ahk_id {{ID16}}", qty: "150" },
-		{ id: "ahk_id {{ID17}}", qty: "150" },
+		{ id: "ahk_id {{ID17}}", qty: "75" },
 		{ id: "ahk_id {{ID18}}", qty: "75" },
 		{ id: "ahk_id {{ID19}}", qty: "75" },
-		{ id: "ahk_id {{ID20}}", qty: "75" },
-		{ id: "ahk_id {{ID21}}", qty: "75" }
+		{ id: "ahk_id {{ID20}}", qty: "75" }
 	]
 
 	number 	  := InputBox("Enter the Number of trades:", "Trade Setup").Value
@@ -351,10 +350,10 @@
 		{ id: "ahk_id {{ID5}}", qty: "525" },
 		{ id: "ahk_id {{ID6}}", qty: "175" },
 		{ id: "ahk_id {{ID7}}", qty: "35" },
-		{ id: "ahk_id {{ID8}}", qty: "35" },
-		{ id: "ahk_id {{ID9}}", qty: "175" },
-		{ id: "ahk_id {{ID10}}", qty: "350" },
-		{ id: "ahk_id {{ID11}}", qty: "875" },
+		{ id: "ahk_id {{ID8}}", qty: "175" },
+		{ id: "ahk_id {{ID9}}", qty: "350" },
+		{ id: "ahk_id {{ID10}}", qty: "875" },
+		{ id: "ahk_id {{ID11}}", qty: "35" },
 		{ id: "ahk_id {{ID12}}", qty: "35" },
 		{ id: "ahk_id {{ID13}}", qty: "35" },
 		{ id: "ahk_id {{ID14}}", qty: "35" },
@@ -363,8 +362,7 @@
 		{ id: "ahk_id {{ID17}}", qty: "35" },
 		{ id: "ahk_id {{ID18}}", qty: "35" },
 		{ id: "ahk_id {{ID19}}", qty: "35" },
-		{ id: "ahk_id {{ID20}}", qty: "35" },
-		{ id: "ahk_id {{ID21}}", qty: "35" }
+		{ id: "ahk_id {{ID20}}", qty: "35" }
 	]
 
 	number 	  := InputBox("Enter the Number of trades:", "Trade Setup").Value
@@ -689,9 +687,9 @@
 		{ id: "ahk_id {{ID6}}", qty: "140" },
 		{ id: "ahk_id {{ID7}}", qty: "140" },
 		{ id: "ahk_id {{ID8}}", qty: "140" },
-		{ id: "ahk_id {{ID9}}", qty: "140" },
-		{ id: "ahk_id {{ID10}}", qty: "280" },
-		{ id: "ahk_id {{ID11}}", qty: "420" },
+		{ id: "ahk_id {{ID9}}", qty: "280" },
+		{ id: "ahk_id {{ID10}}", qty: "420" },
+		{ id: "ahk_id {{ID11}}", qty: "0" },
 		{ id: "ahk_id {{ID12}}", qty: "0" },
 		{ id: "ahk_id {{ID13}}", qty: "0" },
 		{ id: "ahk_id {{ID14}}", qty: "0" },
@@ -700,8 +698,7 @@
 		{ id: "ahk_id {{ID17}}", qty: "0" },
 		{ id: "ahk_id {{ID18}}", qty: "0" },
 		{ id: "ahk_id {{ID19}}", qty: "0" },
-		{ id: "ahk_id {{ID20}}", qty: "0" },
-		{ id: "ahk_id {{ID21}}", qty: "0" }
+		{ id: "ahk_id {{ID20}}", qty: "0" }
 	]
 
 	number 	  := InputBox("Enter the Number of trades:", "Trade Setup").Value
@@ -1025,9 +1022,9 @@
 		{ id: "ahk_id {{ID6}}", qty: "140" },
 		{ id: "ahk_id {{ID7}}", qty: "140" },
 		{ id: "ahk_id {{ID8}}", qty: "140" },
-		{ id: "ahk_id {{ID9}}", qty: "140" },
-		{ id: "ahk_id {{ID10}}", qty: "280" },
-		{ id: "ahk_id {{ID11}}", qty: "420" },
+		{ id: "ahk_id {{ID9}}", qty: "280" },
+		{ id: "ahk_id {{ID10}}", qty: "420" },
+		{ id: "ahk_id {{ID11}}", qty: "0" },
 		{ id: "ahk_id {{ID12}}", qty: "0" },
 		{ id: "ahk_id {{ID13}}", qty: "0" },
 		{ id: "ahk_id {{ID14}}", qty: "0" },
@@ -1036,8 +1033,7 @@
 		{ id: "ahk_id {{ID17}}", qty: "0" },
 		{ id: "ahk_id {{ID18}}", qty: "0" },
 		{ id: "ahk_id {{ID19}}", qty: "0" },
-		{ id: "ahk_id {{ID20}}", qty: "0" },
-		{ id: "ahk_id {{ID21}}", qty: "0" }
+		{ id: "ahk_id {{ID20}}", qty: "0" }
 	]
 	for account in accounts
 	{
@@ -1068,9 +1064,9 @@
 		{ id: "ahk_id {{ID6}}", qty: "140" },
 		{ id: "ahk_id {{ID7}}", qty: "140" },
 		{ id: "ahk_id {{ID8}}", qty: "140" },
-		{ id: "ahk_id {{ID9}}", qty: "140" },
-		{ id: "ahk_id {{ID10}}", qty: "280" },
-		{ id: "ahk_id {{ID11}}", qty: "420" },
+		{ id: "ahk_id {{ID9}}", qty: "280" },
+		{ id: "ahk_id {{ID10}}", qty: "420" },
+		{ id: "ahk_id {{ID11}}", qty: "0" },
 		{ id: "ahk_id {{ID12}}", qty: "0" },
 		{ id: "ahk_id {{ID13}}", qty: "0" },
 		{ id: "ahk_id {{ID14}}", qty: "0" },
@@ -1079,8 +1075,7 @@
 		{ id: "ahk_id {{ID17}}", qty: "0" },
 		{ id: "ahk_id {{ID18}}", qty: "0" },
 		{ id: "ahk_id {{ID19}}", qty: "0" },
-		{ id: "ahk_id {{ID20}}", qty: "0" },
-		{ id: "ahk_id {{ID21}}", qty: "0" }
+		{ id: "ahk_id {{ID20}}", qty: "0" }
 	]
 	for account in accounts
 	{
