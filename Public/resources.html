@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resources</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f6f9;
+      color: #333;
+    }
+
+    header {
+      background: #004080;
+      color: white;
+      padding: 1.2rem 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: #444;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      color: #222;
+    }
+
+    .download-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.6rem 1rem;
+      background: #0066cc;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: background 0.3s ease;
+    }
+
+    .download-link:hover {
+      background: #004080;
+    }
+
+    .back-home {
+      display: block;
+      margin: 3rem auto 0;
+      text-align: center;
+      color: #0066cc;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .back-home:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Resources</h1>
+  </header>
+  <main>
+    <p>Select and download the resources you need:</p>
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">📄</div>
+        <div class="card-title">Amit Sancheti</div>
+        <a href="/resources/Amit Sancheti.exe" download class="download-link">Download</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">📄</div>
+        <div class="card-title">Ashish Soni</div>
+        <a href="/resources/Ashish Soni.exe" download class="download-link">Download</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">📄</div>
+        <div class="card-title">Dhirendra Sharma</div>
+        <a href="/resources/Dhirendra Sharma.exe" download class="download-link">Download</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">📄</div>
+        <div class="card-title">Vinay Khemani</div>
+        <a href="/resources/Vinay Khemani.exe" download class="download-link">Download</a>
+      </div>
+    </div>
+    <a href="/" class="back-home">← Back to Home</a>
+  </main>
+</body>
+</html>
