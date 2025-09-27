@@ -3,7 +3,6 @@ import multer from "multer";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import fetch from "node-fetch";
 import { Octokit } from "@octokit/rest";
 import AdmZip from "adm-zip";
 
@@ -15,8 +14,8 @@ const upload = multer();
 app.use(express.static(path.join(__dirname, "Public")));
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const REPO_OWNER = process.env.Vinay0012;
-const REPO_NAME = process.env.office;
+const REPO_OWNER = "Vinay0012";
+const REPO_NAME = "office";
 const WORKFLOW_FILE = "version5.yml";
 
 const octokit = new Octokit({ auth: GITHUB_TOKEN });
@@ -42,7 +41,7 @@ app.post("/generate", upload.none(), async (req, res) => {
     const ahkFilePath = path.join(outputDir, ahkFileName);
     fs.writeFileSync(ahkFilePath, template);
 
-    // 4️⃣ Push AHK to GitHub (scripts folder)
+    // 4️⃣ Push AHK to GitHub
     const content = fs.readFileSync(ahkFilePath, { encoding: "base64" });
     await octokit.repos.createOrUpdateFileContents({
       owner: REPO_OWNER,
@@ -63,7 +62,7 @@ app.post("/generate", upload.none(), async (req, res) => {
 
     // 6️⃣ Poll workflow for artifact
     let exeUrl = null;
-    const maxAttempts = 30; // 30 * 5s = 2.5 minutes
+    const maxAttempts = 30; // 2.5 minutes
     for (let attempt = 0; attempt < maxAttempts; attempt++) {
       await new Promise(r => setTimeout(r, 5000));
 
@@ -93,15 +92,15 @@ app.post("/generate", upload.none(), async (req, res) => {
 
     if (!exeUrl) return res.status(500).send("Failed to generate EXE in time.");
 
-    // 7️⃣ Download artifact (zip) and extract EXE
+    // 7️⃣ Download artifact (zip) and extract EXE using native fetch
     const artifactResp = await fetch(exeUrl, {
       headers: { Authorization: `token ${GITHUB_TOKEN}` },
     });
-    const buffer = await artifactResp.buffer();
+    const buffer = Buffer.from(await artifactResp.arrayBuffer());
     const zip = new AdmZip(buffer);
     zip.extractAllTo(outputDir, true);
 
-    const exePath = path.join(outputDir, "hello.exe"); // matches your workflow output
+    const exePath = path.join(outputDir, "hello.exe"); // matches workflow output
 
     // 8️⃣ Send EXE to user
     res.download(exePath, "KFS Multiple Clients.exe", () => {
