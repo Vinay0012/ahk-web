@@ -3,7 +3,6 @@ import multer from "multer";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { execSync } from "child_process";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -41,11 +40,6 @@ app.post("/generate", upload.none(), (req, res) => {
 
   const outputPath = path.join(outputDir, `generated_${Date.now()}.ahk`);
   fs.writeFileSync(outputPath, template);
-
-  execSync(`attrib +R "${outputPath}"`);
-
-  console.log("AHK file created and set to read-only:", outputPath);
-
   // send file for download
   res.download(outputPath, "KFS Multiple Clients.ahk", (err) => {
     if (err) console.error("Download error:", err);
