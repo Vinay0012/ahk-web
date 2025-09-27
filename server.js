@@ -30,11 +30,10 @@ app.post("/generate", upload.none(), async (req, res) => {
     const templatePath = path.join(__dirname, "template.ahk");
     let template = fs.readFileSync(templatePath, "utf-8");
     ids.forEach((id, index) => {
-      const regex = new RegExp(`{{ID${index + 1}}}`, "g");
-      template = template.replace(regex, id);
+      template = template.replace(new RegExp(`{{ID${index + 1}}}`, "g"), id);
     });
 
-    // 3️⃣ Save generated AHK locally
+    // 3️⃣ Save locally
     const outputDir = path.join(__dirname, "output");
     if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir);
     const ahkFileName = `generated_${Date.now()}.ahk`;
@@ -60,9 +59,9 @@ app.post("/generate", upload.none(), async (req, res) => {
       inputs: { script_name: ahkFileName },
     });
 
-    // 6️⃣ Poll workflow for artifact
+    // 6️⃣ Poll workflow for artifact (EXE)
     let exeUrl = null;
-    const maxAttempts = 30; // 2.5 minutes
+    const maxAttempts = 30;
     for (let attempt = 0; attempt < maxAttempts; attempt++) {
       await new Promise(r => setTimeout(r, 5000));
 
@@ -92,7 +91,7 @@ app.post("/generate", upload.none(), async (req, res) => {
 
     if (!exeUrl) return res.status(500).send("Failed to generate EXE in time.");
 
-    // 7️⃣ Download artifact (zip) and extract EXE using native fetch
+    // 7️⃣ Download artifact and extract EXE
     const artifactResp = await fetch(exeUrl, {
       headers: { Authorization: `token ${GITHUB_TOKEN}` },
     });
@@ -100,7 +99,8 @@ app.post("/generate", upload.none(), async (req, res) => {
     const zip = new AdmZip(buffer);
     zip.extractAllTo(outputDir, true);
 
-    const exePath = path.join(outputDir, "hello.exe"); // matches workflow output
+    // Workflow outputs "hello.exe", adjust if different
+    const exePath = path.join(outputDir, "hello.exe");
 
     // 8️⃣ Send EXE to user
     res.download(exePath, "KFS Multiple Clients.exe", () => {
