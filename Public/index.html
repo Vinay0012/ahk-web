@@ -79,6 +79,44 @@
     button:hover {
       background-color: #2980b9;
     }
+	
+	.client-row {
+	  display: grid;
+	  grid-template-columns: 1fr 1fr 1fr 1fr 1fr; /* same as header */
+	  align-items: center;
+	  gap: 10px;
+	  margin-bottom: 8px;
+	  padding: 10px;
+	  border: 1px solid #ddd;
+	  border-radius: 6px;
+	  background: #fff;
+	}
+
+	.client-row input {
+	  width: 100%;
+	  padding: 6px 8px;
+	  border: 1px solid #ccc;
+	  border-radius: 4px;
+	}
+	
+	.header-row {
+	  display: grid;
+	  grid-template-columns: 1fr 1fr 1fr 1fr 1fr; /* 5 equal columns */
+	  font-weight: bold;
+	  text-align: center;
+	  background: #f0f4ff;
+	  border-radius: 8px;
+	  padding: 10px;
+	  margin-bottom: 10px;
+	}
+	
+
+	.header-row div:first-child,
+	.client-row div:first-child {
+	  text-align: left;
+	  padding-left: 10px; /* optional for spacing */
+	}
+
 
     .progress {
       margin-top: 20px;
@@ -109,10 +147,16 @@
   </style>
 </head>
 <body>
-  <h2>Enter Client IDs (Quantities Locked)</h2>
+  <h2>Enter AHK IDs (Quantities Locked)</h2>
   <div class="container">
     <form id="clientForm">
-      <div class="client"><label><h3>Client ID</h3></label><label><h3>AHK ID</h3></label><label><h4>Nifty</h4></label><label><h4>BankNifty</h4></label><label><h4>MidcapNifty</h4></label>
+      <div class="header-row">
+  <div>Client ID</div>
+  <div>AHK ID</div>
+  <div>Nifty</div>
+  <div>BankNifty</div>
+  <div>MidcapNifty</div>
+</div>
       <!-- Clients with locked quantities -->
       <div class="client"><h3>Amit Sancheti:</h3></div>
       <div class="client"><label>B18952</label><input type="text" name="client1" placeholder="Enter ID"><input type="text" value="525" readonly><input type="text" value="175" readonly><input type="text" value="140" readonly></div>
