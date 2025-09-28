@@ -59,6 +59,12 @@
 		; --- Loop through accounts ---
 		for account in accounts {
 			if WinExist(account.id) {
+				finalQty := account.qty * multiplier
+				finalQty := Round(finalQty)
+				if(Mod(finalQty, 75) != 0)
+				{
+					finalQty := Ceil(finalQty / 75) * 75
+				}
 				WinActivate(account.id)
 				Sleep (100)
 
@@ -113,7 +119,7 @@
 				}
 				Sleep (500)
 		
-				Send(account.qty * multiplier)  
+				Send(finalQty)  
 				Sleep (100)
 				Send("{Tab}")
 				Sleep (100)
@@ -175,6 +181,18 @@
 		; --- Loop through accounts ---
 		for account in accounts {
 			if WinExist(account.id) {
+				finalQty := account.qty * multiplier
+				finalQty := Round(finalQty)
+				if(Mod(finalQty, 75) != 0)
+				{
+					finalQty := Ceil(finalQty / 75) * 75
+				}
+				finalQty2 := account.qty * multiplier2
+				finalQty2 := Round(finalQty2)
+				if(Mod(finalQty2, 75) != 0)
+				{
+					finalQty2 := Ceil(finalQty2 / 75) * 75
+				}
 				WinActivate(account.id)
 				Sleep (100)
 
@@ -229,7 +247,7 @@
 				}
 				Sleep (500)
             
-				Send(account.qty * multiplier)  
+				Send(finalQty)  
 				Sleep (100)
 				Send("{Tab}")
 				Sleep (100)
@@ -304,7 +322,7 @@
 				}
 				Sleep (500)
             
-				Send(account.qty * multiplier2)  
+				Send(finalQty2)  
 				Sleep (100)
 				Send("{Tab}")
 				Sleep (100)
@@ -395,6 +413,12 @@
 		; --- Loop through accounts ---
 		for account in accounts {
 			if WinExist(account.id) {
+				finalQty := account.qty * multiplier
+				finalQty := Round(finalQty)
+				if(Mod(finalQty, 35) != 0)
+				{
+					finalQty := Ceil(finalQty / 35) * 35
+				}
 				WinActivate(account.id)
 				Sleep (100)
 
@@ -449,7 +473,7 @@
 				}
 				Sleep (500)
 		
-				Send(account.qty * multiplier)  
+				Send(finalQty)  
 				Sleep (100)
 				Send("{Tab}")
 				Sleep (100)
@@ -511,6 +535,18 @@
 		; --- Loop through accounts ---
 		for account in accounts {
 			if WinExist(account.id) {
+				finalQty := account.qty * multiplier
+				finalQty := Round(finalQty)
+				if(Mod(finalQty, 35) != 0)
+				{
+					finalQty := Ceil(finalQty / 35) * 35
+				}
+				finalQty2 := account.qty * multiplier2
+				finalQty2 := Round(finalQty2)
+				if(Mod(finalQty2, 35) != 0)
+				{
+					finalQty2 := Ceil(finalQty2 / 35) * 35
+				}
 				WinActivate(account.id)
 				Sleep (100)
 
@@ -565,7 +601,7 @@
 				}
 				Sleep (500)
             
-				Send(account.qty * multiplier)  
+				Send(finalQty)  
 				Sleep (100)
 				Send("{Tab}")
 				Sleep (100)
@@ -640,7 +676,7 @@
 				}
 				Sleep (500)
             
-				Send(account.qty * multiplier2)  
+				Send(finalQty2)  
 				Sleep (100)
 				Send("{Tab}")
 				Sleep (100)
@@ -731,6 +767,12 @@
 		; --- Loop through accounts ---
 		for account in accounts {
 			if WinExist(account.id) {
+				finalQty := account.qty * multiplier
+				finalQty := Round(finalQty)
+				if(Mod(finalQty, 140) != 0)
+				{
+					finalQty := Ceil(finalQty / 140) * 140
+				}
 				WinActivate(account.id)
 				Sleep (100)
 
@@ -785,7 +827,7 @@
 				}
 				Sleep (500)
 		
-				Send(account.qty * multiplier)  
+				Send(finalQty)  
 				Sleep (100)
 				Send("{Tab}")
 				Sleep (100)
@@ -847,6 +889,18 @@
 		; --- Loop through accounts ---
 		for account in accounts {
 			if WinExist(account.id) {
+				finalQty := account.qty * multiplier
+				finalQty := Round(finalQty)
+				if(Mod(finalQty, 140) != 0)
+				{
+					finalQty := Ceil(finalQty / 140) * 140
+				}
+				finalQty2 := account.qty * multiplier2
+				finalQty2 := Round(finalQty2)
+				if(Mod(finalQty2, 140) != 0)
+				{
+					finalQty2 := Ceil(finalQty2 / 140) * 140
+				}
 				WinActivate(account.id)
 				Sleep (100)
 
@@ -901,7 +955,7 @@
 				}
 				Sleep (500)
             
-				Send(account.qty * multiplier)  
+				Send(finalQty)  
 				Sleep (100)
 				Send("{Tab}")
 				Sleep (100)
@@ -976,7 +1030,7 @@
 				}
 				Sleep (500)
             
-				Send(account.qty * multiplier2)  
+				Send(finalQty2)  
 				Sleep (100)
 				Send("{Tab}")
 				Sleep (100)
