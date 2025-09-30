@@ -89,7 +89,7 @@
 					{
 						Sleep (100)
 						Send("{Down}")
-						Sleep (300)
+						Sleep (200)
 						Send("+{Tab}")
 						Sleep (100)
 					}
@@ -222,7 +222,7 @@
 					{
 						Sleep (100)
 						Send("{Down}")
-						Sleep (300)
+						Sleep (200)
 						Send("+{Tab}")
 						Sleep (100)
 					}
@@ -297,7 +297,7 @@
 					{
 						Sleep (100)
 						Send("{Down}")
-						Sleep (300)
+						Sleep (200)
 						Send("+{Tab}")
 						Sleep (100)
 					}
@@ -453,7 +453,7 @@
 					{
 						Sleep (100)
 						Send("{Down}")
-						Sleep (300)
+						Sleep (200)
 						Send("+{Tab}")
 						Sleep (100)
 					}
@@ -586,7 +586,7 @@
 					{
 						Sleep (100)
 						Send("{Down}")
-						Sleep (300)
+						Sleep (200)
 						Send("+{Tab}")
 						Sleep (100)
 					}
@@ -661,7 +661,7 @@
 					{
 						Sleep (100)
 						Send("{Down}")
-						Sleep (300)
+						Sleep (200)
 						Send("+{Tab}")
 						Sleep (100)
 					}
@@ -817,7 +817,7 @@
 					{
 						Sleep (100)
 						Send("{Down}")
-						Sleep (300)
+						Sleep (200)
 						Send("+{Tab}")
 						Sleep (100)
 					}
@@ -950,7 +950,7 @@
 					{
 						Sleep (100)
 						Send("{Down}")
-						Sleep (300)
+						Sleep (200)
 						Send("+{Tab}")
 						Sleep (100)
 					}
@@ -1025,7 +1025,7 @@
 					{
 						Sleep (100)
 						Send("{Down}")
-						Sleep (300)
+						Sleep (200)
 						Send("+{Tab}")
 						Sleep (100)
 					}
