@@ -262,7 +262,7 @@
 				Send("Y")
 				Sleep(300)
 				
-				Sleep(1000)
+				Sleep(300)
 				
 				Send("{Esc}")
 				Sleep(100)
@@ -616,7 +616,7 @@
 				Send("Y")
 				Sleep(300)
 				
-				Sleep(1000)
+				Sleep(300)
 				
 				Send("{Esc}")
 				Sleep(100)
@@ -970,7 +970,7 @@
 				Send("Y")
 				Sleep(300)
 				
-				Sleep(1000)
+				Sleep(300)
 				
 				Send("{Esc}")
 				Sleep(100)
