@@ -68,6 +68,11 @@
 				WinActivate(account.id)
 				Sleep (100)
 
+				Send("{Esc}")
+				Sleep(100)
+				Send("{Esc}")
+				Sleep(100)
+
 				Send("{Home}")
 				Sleep(100)
 				Send("N")
@@ -196,6 +201,11 @@
 				WinActivate(account.id)
 				Sleep (100)
 
+				Send("{Esc}")
+				Sleep(100)
+				Send("{Esc}")
+				Sleep(100)
+
 				Send("{Home}")
 				Sleep(100)
 				Send("N")          
@@ -262,7 +272,7 @@
 				Send("Y")
 				Sleep(300)
 				
-				Sleep(300)
+				Sleep(100)
 				
 				Send("{Esc}")
 				Sleep(100)
@@ -422,6 +432,11 @@
 				WinActivate(account.id)
 				Sleep (100)
 
+				Send("{Esc}")
+				Sleep(100)
+				Send("{Esc}")
+				Sleep(100)
+
 				Send("{Home}")
 				Sleep(100)
 				Send("B")
@@ -550,6 +565,11 @@
 				WinActivate(account.id)
 				Sleep (100)
 
+				Send("{Esc}")
+				Sleep(100)
+				Send("{Esc}")
+				Sleep(100)
+
 				Send("{Home}")
 				Sleep(100)
 				Send("B")          
@@ -616,7 +636,7 @@
 				Send("Y")
 				Sleep(300)
 				
-				Sleep(300)
+				Sleep(100)
 				
 				Send("{Esc}")
 				Sleep(100)
@@ -776,6 +796,11 @@
 				WinActivate(account.id)
 				Sleep (100)
 
+				Send("{Esc}")
+				Sleep(100)
+				Send("{Esc}")
+				Sleep(100)
+
 				Send("{Home}")
 				Sleep(100)
 				Send("M")
@@ -904,6 +929,11 @@
 				WinActivate(account.id)
 				Sleep (100)
 
+				Send("{Esc}")
+				Sleep(100)
+				Send("{Esc}")
+				Sleep(100)
+
 				Send("{Home}")
 				Sleep(100)
 				Send("M")          
@@ -970,7 +1000,7 @@
 				Send("Y")
 				Sleep(300)
 				
-				Sleep(300)
+				Sleep(100)
 				
 				Send("{Esc}")
 				Sleep(100)
