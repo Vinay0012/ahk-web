@@ -6,17 +6,24 @@
 
 ^!n:: {  
 
-	accounts := [
+	groups := [
+	[
 		{ id: "ahk_id {{ID1}}", qty: "525" },
 		{ id: "ahk_id {{ID2}}", qty: "1575" },
 		{ id: "ahk_id {{ID3}}", qty: "525" },
 		{ id: "ahk_id {{ID4}}", qty: "525" },
+	],
+	[
 		{ id: "ahk_id {{ID5}}", qty: "1575" },
 		{ id: "ahk_id {{ID6}}", qty: "525" },
 		{ id: "ahk_id {{ID7}}", qty: "150" },
+	],
+	[
 		{ id: "ahk_id {{ID8}}", qty: "525" },
 		{ id: "ahk_id {{ID9}}", qty: "1050" },
 		{ id: "ahk_id {{ID10}}", qty: "2700" },
+	],
+	[
 		{ id: "ahk_id {{ID11}}", qty: "375" },
 		{ id: "ahk_id {{ID12}}", qty: "375" },
 		{ id: "ahk_id {{ID13}}", qty: "225" },
@@ -28,6 +35,13 @@
 		{ id: "ahk_id {{ID19}}", qty: "75" },
 		{ id: "ahk_id {{ID20}}", qty: "75" }
 	]
+	]
+
+	input 	:= InputBox("Enter the group numbers to trade (e.g. 1 3 for groups 1 and 3):", "Trade Selection")
+	if(input.Result = "Cancel" or input.Value = "")
+		ExitApp
+
+	selectedGroups	:= StrSplit(input.Value, A_Space)
 
 	number 	  := InputBox("Enter the Number of trades:", "Trade Setup").Value
 	if (number < "1" && number > "2")
@@ -56,88 +70,97 @@
 		}
 		multiplier := InputBox("Enter the Quantity Multiplier:", "Trade Setup").Value
 
-		; --- Loop through accounts ---
-		for account in accounts {
-			if WinExist(account.id) {
-				finalQty := account.qty * multiplier
-				finalQty := Round(finalQty)
-				if(Mod(finalQty, 75) != 0)
-				{
-					finalQty := Ceil(finalQty / 75) * 75
-				}
-				WinActivate(account.id)
-				Sleep (100)
-
-				Send("{Esc}")
-				Sleep(100)
-				Send("{Esc}")
-				Sleep(100)
-
-				Send("{Home}")
-				Sleep(100)
-				Send("N")
-				Sleep (100)
-		
-				Send("{F5}")
-				Sleep (300)
-				Send("{Tab}")
-				Sleep (100)
-		
-				if(expiry > 0)
-				{
-					Loop expiry
+		; --- Loop through groups and accounts ---
+		for _, g in selectedGroups {
+			gNum := Integer(g)
+			if(gNum < 1 or gNum > groups.length) {
+				MsgBox("Invalid Group number: " gNum)
+				continue
+			}
+			
+			; MsgBox("Executing trades for group" gNum)
+			for account in groups[gNum] {
+				if WinExist(account.id) {
+					finalQty := account.qty * multiplier
+					finalQty := Round(finalQty)
+					if(Mod(finalQty, 75) != 0)
 					{
-						Sleep (100)
-						Send("{Down}")
-						Sleep (200)
-						Send("+{Tab}")
-						Sleep (100)
+						finalQty := Ceil(finalQty / 75) * 75
 					}
-					Send("{Tab}")
-				}
-				else
-				{
-					Send("{Tab}")
-				}
-		
-				Send(strike)
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-		
-				Send(optType)
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-		
-				if (orderType = "B" or orderType = "BUY")
-				{
-					Send("{F1}")
-				}
-				else if (orderType = "S" or orderType = "SELL")
-				{
-					Send("{F2}")
-				}
-				else
-				{
-					return
-				}
-				Sleep (500)
-		
-				Send(finalQty)  
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
+					WinActivate(account.id)
+					Sleep (100)
 
-				Send(price)
-				Sleep (100)
+					Send("{Esc}")
+					Sleep(100)
+					Send("{Esc}")
+					Sleep(100)
+
+					Send("{Home}")
+					Sleep(100)
+					Send("N")
+					Sleep (100)
+			
+					Send("{F5}")
+					Sleep (300)
+					Send("{Tab}")
+					Sleep (100)
 		
-				Send("{Enter}")
-				Sleep(300)
-				Send("Y")
-				Sleep(200)
-				Send("Y")
-				Sleep(300)
+					if(expiry > 0)
+					{
+						Loop expiry
+						{
+							Sleep (100)
+							Send("{Down}")
+							Sleep (200)
+							Send("+{Tab}")
+							Sleep (100)
+						}
+						Send("{Tab}")
+					}
+					else
+					{
+						Send("{Tab}")
+					}
+			
+					Send(strike)
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+		
+					Send(optType)
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+		
+					if (orderType = "B" or orderType = "BUY")
+					{
+						Send("{F1}")
+					}
+					else if (orderType = "S" or orderType = "SELL")
+					{
+						Send("{F2}")
+					}
+					else
+					{
+						return
+					}
+					Sleep (500)
+		
+					Send(finalQty)  
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+
+					Send(price)
+					Sleep (100)
+		
+					Send("{Enter}")
+					Sleep(300)
+					Send("Y")
+					Sleep(200)
+					Send("Y")
+					Sleep(300)
+				}
 			}
 		}
 	}
@@ -184,203 +207,227 @@
 		multiplier2 := InputBox("Enter 2nd Trade Quantity Multiplier:", "Trade Setup").Value
 
 		; --- Loop through accounts ---
-		for account in accounts {
-			if WinExist(account.id) {
-				finalQty := account.qty * multiplier
-				finalQty := Round(finalQty)
-				if(Mod(finalQty, 75) != 0)
-				{
-					finalQty := Ceil(finalQty / 75) * 75
-				}
-				finalQty2 := account.qty * multiplier2
-				finalQty2 := Round(finalQty2)
-				if(Mod(finalQty2, 75) != 0)
-				{
-					finalQty2 := Ceil(finalQty2 / 75) * 75
-				}
-				WinActivate(account.id)
-				Sleep (100)
-
-				Send("{Esc}")
-				Sleep(100)
-				Send("{Esc}")
-				Sleep(100)
-
-				Send("{Home}")
-				Sleep(100)
-				Send("N")          
-				Sleep (100)
-			
-				Send("{F5}")
-				Sleep (300)
-				Send("{Tab}")
-				Sleep (100)
-			
-				if(expiry > 0)
-				{
-					Loop expiry
+		for _, g in selectedGroups {
+			gNum := Integer(g)
+			if(gNum < 1 or gNum > groups.length) {
+				MsgBox("Invalid Group number: " gNum)
+				continue
+			}
+		
+			for account in groups[gNum] {
+				if WinExist(account.id) {
+					finalQty := account.qty * multiplier
+					finalQty := Round(finalQty)
+					if(Mod(finalQty, 75) != 0)
 					{
-						Sleep (100)
-						Send("{Down}")
-						Sleep (200)
-						Send("+{Tab}")
-						Sleep (100)
+						finalQty := Ceil(finalQty / 75) * 75
 					}
-					Send("{Tab}")
-				}
-				else
-				{
-					Send("{Tab}")
-				}
-			
-				Send(strike)
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-			
-				Send(optType)
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-			
-				if (orderType = "B" or orderType = "BUY")
-				{
-					Send("{F1}")
-				}
-				else if (orderType = "S" or orderType = "SELL")
-				{
-					Send("{F2}")
-				}
-				else
-				{
-					return
-				}
-				Sleep (500)
-            
-				Send(finalQty)  
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-
-				Send(price)
-				Sleep (100)
-			
-				Send("{Enter}")
-				Sleep(300)
-				Send("Y")
-				Sleep(200)
-				Send("Y")
-				Sleep(300)
-				
-				Sleep(100)
-				
-				Send("{Esc}")
-				Sleep(100)
-				Send("{Esc}")
-				Sleep(100)
-				Send("{Esc}")
-				Sleep(100)
-				
-				Send("{Home}")
-				Sleep(100)
-				Send("N")
-				Sleep (100)
-			
-				Send("{F5}")
-				Sleep (300)
-				Send("{Tab}")
-				Sleep (100)
-			
-				if(expiry2 > 0)
-				{
-					Loop expiry2
+					finalQty2 := account.qty * multiplier2
+					finalQty2 := Round(finalQty2)
+					if(Mod(finalQty2, 75) != 0)
 					{
-						Sleep (100)
-						Send("{Down}")
-						Sleep (200)
-						Send("+{Tab}")
-						Sleep (100)
+						finalQty2 := Ceil(finalQty2 / 75) * 75
 					}
-					Send("{Tab}")
-				}
-				else
-				{
-					Send("{Tab}")
-				}
-			
-				Send(strike2)
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-			
-				Send(optType2)
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-			
-				if (orderType2 = "B" or orderType2 = "BUY")
-				{
-					Send("{F1}")
-				}
-				else if (orderType2 = "S" or orderType2 = "SELL")
-				{
-					Send("{F2}")
-				}
-				else
-				{
-					return
-				}
-				Sleep (500)
-            
-				Send(finalQty2)  
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
+					WinActivate(account.id)
+					Sleep (100)
 
-				Send(price2)
-				Sleep (100)
+					Send("{Esc}")
+					Sleep(100)
+					Send("{Esc}")
+					Sleep(100)
+
+					Send("{Home}")
+					Sleep(100)
+					Send("N")          
+					Sleep (100)
 			
-				Send("{Enter}")
-				Sleep(300)
-				Send("Y")
-				Sleep(200)
-				Send("Y")
-				Sleep(300)
+					Send("{F5}")
+					Sleep (300)
+					Send("{Tab}")
+					Sleep (100)
+			
+					if(expiry > 0)
+					{
+						Loop expiry
+						{
+							Sleep (100)
+							Send("{Down}")
+							Sleep (200)
+							Send("+{Tab}")
+							Sleep (100)
+						}
+						Send("{Tab}")
+					}
+					else
+					{
+						Send("{Tab}")
+					}
+			
+					Send(strike)
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+			
+					Send(optType)
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+			
+					if (orderType = "B" or orderType = "BUY")
+					{
+						Send("{F1}")
+					}
+					else if (orderType = "S" or orderType = "SELL")
+					{
+						Send("{F2}")
+					}
+					else
+					{
+						return
+					}
+					Sleep (500)
+            
+					Send(finalQty)  
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+
+					Send(price)
+					Sleep (100)
+			
+					Send("{Enter}")
+					Sleep(300)
+					Send("Y")
+					Sleep(200)
+					Send("Y")
+					Sleep(300)
+				
+					Sleep(100)
+				
+					Send("{Esc}")
+					Sleep(100)
+					Send("{Esc}")
+					Sleep(100)
+					Send("{Esc}")
+					Sleep(100)
+				
+					Send("{Home}")
+					Sleep(100)
+					Send("N")
+					Sleep (100)
+			
+					Send("{F5}")
+					Sleep (300)
+					Send("{Tab}")
+					Sleep (100)
+			
+					if(expiry2 > 0)
+					{
+						Loop expiry2
+						{
+							Sleep (100)
+							Send("{Down}")
+							Sleep (200)
+							Send("+{Tab}")
+							Sleep (100)
+						}
+						Send("{Tab}")
+					}
+					else
+					{
+						Send("{Tab}")
+					}
+			
+					Send(strike2)
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+			
+					Send(optType2)
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+			
+					if (orderType2 = "B" or orderType2 = "BUY")
+					{
+						Send("{F1}")
+					}
+					else if (orderType2 = "S" or orderType2 = "SELL")
+					{
+						Send("{F2}")
+					}
+					else	
+					{
+						return
+					}
+					Sleep (500)
+            
+					Send(finalQty2)  
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+
+					Send(price2)
+					Sleep (100)
+			
+					Send("{Enter}")
+					Sleep(300)
+					Send("Y")
+					Sleep(200)
+					Send("Y")
+					Sleep(300)
+				}
 			}
 		}
 	}
 	
-	for account in accounts
-	{
-		if WinExist(account.id)
-		{
-			WinActivate(account.id)
-			Sleep (100)
-			Send("{Esc}")
-			Sleep (100)
-			Send("{Esc}")
-			Sleep(100)
-			Send("{Esc}")
-			Sleep (100)
-			Send("!{F6}")
-			Sleep (300)
+	for _, g in selectedGroups {
+			gNum := Integer(g)
+			if(gNum < 1 or gNum > groups.length) {
+				MsgBox("Invalid Group number: " gNum)
+				continue
+			}
+	
+			for account in groups[gNum] {
+		
+			{
+			if WinExist(account.id)
+			{
+				WinActivate(account.id)
+				Sleep (100)
+				Send("{Esc}")
+				Sleep (100)
+				Send("{Esc}")
+				Sleep(100)
+				Send("{Esc}")
+				Sleep (100)
+				Send("!{F6}")
+				Sleep (300)
+				}
+			}
 		}
 	}
 }
 
 ^!b:: {  
-
-	accounts := [
+	groups := [
+	[
 		{ id: "ahk_id {{ID1}}", qty: "175" },
 		{ id: "ahk_id {{ID2}}", qty: "525" },
 		{ id: "ahk_id {{ID3}}", qty: "175" },
 		{ id: "ahk_id {{ID4}}", qty: "175" },
+	],
+	[
 		{ id: "ahk_id {{ID5}}", qty: "525" },
 		{ id: "ahk_id {{ID6}}", qty: "175" },
 		{ id: "ahk_id {{ID7}}", qty: "35" },
+	],
+	[
 		{ id: "ahk_id {{ID8}}", qty: "175" },
 		{ id: "ahk_id {{ID9}}", qty: "350" },
 		{ id: "ahk_id {{ID10}}", qty: "875" },
+	],
+	[
 		{ id: "ahk_id {{ID11}}", qty: "35" },
 		{ id: "ahk_id {{ID12}}", qty: "35" },
 		{ id: "ahk_id {{ID13}}", qty: "35" },
@@ -392,6 +439,13 @@
 		{ id: "ahk_id {{ID19}}", qty: "35" },
 		{ id: "ahk_id {{ID20}}", qty: "35" }
 	]
+	]
+
+	input 	:= InputBox("Enter the group numbers to trade (e.g. 1 3 for groups 1 and 3):", "Trade Selection")
+	if(input.Result = "Cancel" or input.Value = "")
+		ExitApp
+
+	selectedGroups	:= StrSplit(input.Value, A_Space)
 
 	number 	  := InputBox("Enter the Number of trades:", "Trade Setup").Value
 	if (number < "1" && number > "2")
@@ -421,87 +475,97 @@
 		multiplier := InputBox("Enter the Quantity Multiplier:", "Trade Setup").Value
 
 		; --- Loop through accounts ---
-		for account in accounts {
-			if WinExist(account.id) {
-				finalQty := account.qty * multiplier
-				finalQty := Round(finalQty)
-				if(Mod(finalQty, 35) != 0)
-				{
-					finalQty := Ceil(finalQty / 35) * 35
-				}
-				WinActivate(account.id)
-				Sleep (100)
-
-				Send("{Esc}")
-				Sleep(100)
-				Send("{Esc}")
-				Sleep(100)
-
-				Send("{Home}")
-				Sleep(100)
-				Send("B")
-				Sleep (100)
 		
-				Send("{F5}")
-				Sleep (300)
-				Send("{Tab}")
-				Sleep (100)
-		
-				if(expiry > 0)
-				{
-					Loop expiry
+		for _, g in selectedGroups {
+			gNum := Integer(g)
+			if(gNum < 1 or gNum > groups.length) {
+				MsgBox("Invalid Group number: " gNum)
+				continue
+			}
+			
+			; MsgBox("Executing trades for group" gNum)
+			for account in groups[gNum] {
+				if WinExist(account.id) {
+					finalQty := account.qty * multiplier
+					finalQty := Round(finalQty)
+					if(Mod(finalQty, 35) != 0)
 					{
-						Sleep (100)
-						Send("{Down}")
-						Sleep (200)
-						Send("+{Tab}")
-						Sleep (100)
+						finalQty := Ceil(finalQty / 35) * 35
 					}
-					Send("{Tab}")
-				}
-				else
-				{
-					Send("{Tab}")
-				}
-		
-				Send(strike)
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-		
-				Send(optType)
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-		
-				if (orderType = "B" or orderType = "BUY")
-				{
-					Send("{F1}")
-				}
-				else if (orderType = "S" or orderType = "SELL")
-				{
-					Send("{F2}")
-				}
-				else
-				{
-					return
-				}
-				Sleep (500)
-		
-				Send(finalQty)  
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
+					WinActivate(account.id)
+					Sleep (100)
 
-				Send(price)
-				Sleep (100)
+					Send("{Esc}")
+					Sleep(100)
+					Send("{Esc}")
+					Sleep(100)
+
+					Send("{Home}")
+					Sleep(100)
+					Send("B")
+					Sleep (100)
+			
+					Send("{F5}")
+					Sleep (300)
+					Send("{Tab}")
+					Sleep (100)
 		
-				Send("{Enter}")
-				Sleep(300)
-				Send("Y")
-				Sleep(200)
-				Send("Y")
-				Sleep(300)
+					if(expiry > 0)
+					{
+						Loop expiry
+						{
+							Sleep (100)
+							Send("{Down}")
+							Sleep (200)
+							Send("+{Tab}")
+							Sleep (100)
+						}
+						Send("{Tab}")
+					}
+					else
+					{
+						Send("{Tab}")
+					}
+			
+					Send(strike)
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+		
+					Send(optType)
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+		
+					if (orderType = "B" or orderType = "BUY")
+					{
+						Send("{F1}")
+					}
+					else if (orderType = "S" or orderType = "SELL")
+					{
+						Send("{F2}")
+					}
+					else
+					{
+						return
+					}
+					Sleep (500)
+		
+					Send(finalQty)  
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+
+					Send(price)
+					Sleep (100)
+		
+					Send("{Enter}")
+					Sleep(300)
+					Send("Y")
+					Sleep(200)
+					Send("Y")
+					Sleep(300)
+				}
 			}
 		}
 	}
@@ -548,203 +612,227 @@
 		multiplier2 := InputBox("Enter 2nd Trade Quantity Multiplier:", "Trade Setup").Value
 
 		; --- Loop through accounts ---
-		for account in accounts {
-			if WinExist(account.id) {
-				finalQty := account.qty * multiplier
-				finalQty := Round(finalQty)
-				if(Mod(finalQty, 35) != 0)
-				{
-					finalQty := Ceil(finalQty / 35) * 35
-				}
-				finalQty2 := account.qty * multiplier2
-				finalQty2 := Round(finalQty2)
-				if(Mod(finalQty2, 35) != 0)
-				{
-					finalQty2 := Ceil(finalQty2 / 35) * 35
-				}
-				WinActivate(account.id)
-				Sleep (100)
-
-				Send("{Esc}")
-				Sleep(100)
-				Send("{Esc}")
-				Sleep(100)
-
-				Send("{Home}")
-				Sleep(100)
-				Send("B")          
-				Sleep (100)
-			
-				Send("{F5}")
-				Sleep (300)
-				Send("{Tab}")
-				Sleep (100)
-			
-				if(expiry > 0)
-				{
-					Loop expiry
+		
+		for _, g in selectedGroups {
+			gNum := Integer(g)
+			if(gNum < 1 or gNum > groups.length) {
+				MsgBox("Invalid Group number: " gNum)
+				continue
+			}
+		
+			for account in groups[gNum] {
+				if WinExist(account.id) {
+					finalQty := account.qty * multiplier
+					finalQty := Round(finalQty)
+					if(Mod(finalQty, 35) != 0)
 					{
-						Sleep (100)
-						Send("{Down}")
-						Sleep (200)
-						Send("+{Tab}")
-						Sleep (100)
+						finalQty := Ceil(finalQty / 35) * 35
 					}
-					Send("{Tab}")
-				}
-				else
-				{
-					Send("{Tab}")
-				}
-			
-				Send(strike)
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-			
-				Send(optType)
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-			
-				if (orderType = "B" or orderType = "BUY")
-				{
-					Send("{F1}")
-				}
-				else if (orderType = "S" or orderType = "SELL")
-				{
-					Send("{F2}")
-				}
-				else
-				{
-					return
-				}
-				Sleep (500)
-            
-				Send(finalQty)  
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-
-				Send(price)
-				Sleep (100)
-			
-				Send("{Enter}")
-				Sleep(300)
-				Send("Y")
-				Sleep(200)
-				Send("Y")
-				Sleep(300)
-				
-				Sleep(100)
-				
-				Send("{Esc}")
-				Sleep(100)
-				Send("{Esc}")
-				Sleep(100)
-				Send("{Esc}")
-				Sleep(100)
-				
-				Send("{Home}")
-				Sleep(100)
-				Send("B")
-				Sleep (100)
-			
-				Send("{F5}")
-				Sleep (300)
-				Send("{Tab}")
-				Sleep (100)
-			
-				if(expiry2 > 0)
-				{
-					Loop expiry2
+					finalQty2 := account.qty * multiplier2
+					finalQty2 := Round(finalQty2)
+					if(Mod(finalQty2, 35) != 0)
 					{
-						Sleep (100)
-						Send("{Down}")
-						Sleep (200)
-						Send("+{Tab}")
-						Sleep (100)
+						finalQty2 := Ceil(finalQty2 / 35) * 35
 					}
-					Send("{Tab}")
-				}
-				else
-				{
-					Send("{Tab}")
-				}
-			
-				Send(strike2)
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-			
-				Send(optType2)
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-			
-				if (orderType2 = "B" or orderType2 = "BUY")
-				{
-					Send("{F1}")
-				}
-				else if (orderType2 = "S" or orderType2 = "SELL")
-				{
-					Send("{F2}")
-				}
-				else
-				{
-					return
-				}
-				Sleep (500)
-            
-				Send(finalQty2)  
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
+					WinActivate(account.id)
+					Sleep (100)
 
-				Send(price2)
-				Sleep (100)
+					Send("{Esc}")
+					Sleep(100)
+					Send("{Esc}")
+					Sleep(100)
+
+					Send("{Home}")
+					Sleep(100)
+					Send("B")          
+					Sleep (100)
 			
-				Send("{Enter}")
-				Sleep(300)
-				Send("Y")
-				Sleep(200)
-				Send("Y")
-				Sleep(300)
+					Send("{F5}")
+					Sleep (300)
+					Send("{Tab}")
+					Sleep (100)
+			
+					if(expiry > 0)
+					{
+						Loop expiry
+						{
+							Sleep (100)
+							Send("{Down}")
+							Sleep (200)
+							Send("+{Tab}")
+							Sleep (100)
+						}
+						Send("{Tab}")
+					}
+					else
+					{
+						Send("{Tab}")
+					}
+			
+					Send(strike)
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+			
+					Send(optType)
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+			
+					if (orderType = "B" or orderType = "BUY")
+					{
+						Send("{F1}")
+					}
+					else if (orderType = "S" or orderType = "SELL")
+					{
+						Send("{F2}")
+					}
+					else
+					{
+						return
+					}
+					Sleep (500)
+            
+					Send(finalQty)  
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+
+					Send(price)
+					Sleep (100)
+			
+					Send("{Enter}")
+					Sleep(300)
+					Send("Y")
+					Sleep(200)
+					Send("Y")
+					Sleep(300)
+				
+					Sleep(100)
+				
+					Send("{Esc}")
+					Sleep(100)
+					Send("{Esc}")
+					Sleep(100)
+					Send("{Esc}")
+					Sleep(100)
+				
+					Send("{Home}")
+					Sleep(100)
+					Send("B")
+					Sleep (100)
+			
+					Send("{F5}")
+					Sleep (300)
+					Send("{Tab}")
+					Sleep (100)
+			
+					if(expiry2 > 0)
+					{
+						Loop expiry2
+						{
+							Sleep (100)
+							Send("{Down}")
+							Sleep (200)
+							Send("+{Tab}")
+							Sleep (100)
+						}
+						Send("{Tab}")
+					}
+					else
+					{
+						Send("{Tab}")
+					}
+			
+					Send(strike2)
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+			
+					Send(optType2)
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+			
+					if (orderType2 = "B" or orderType2 = "BUY")
+					{
+						Send("{F1}")
+					}
+					else if (orderType2 = "S" or orderType2 = "SELL")
+					{
+						Send("{F2}")
+					}
+					else
+					{
+						return
+					}
+					Sleep (500)
+            
+					Send(finalQty2)  
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+
+					Send(price2)
+					Sleep (100)
+			
+					Send("{Enter}")
+					Sleep(300)
+					Send("Y")
+					Sleep(200)
+					Send("Y")
+					Sleep(300)
+				}
 			}
 		}
-	}
+	} 
 	
-	for account in accounts
-	{
-		if WinExist(account.id)
+	for _, g in selectedGroups {
+			gNum := Integer(g)
+			if(gNum < 1 or gNum > groups.length) {
+				MsgBox("Invalid Group number: " gNum)
+				continue
+			}
+	
+		for account in groups[gNum]
 		{
-			WinActivate(account.id)
-			Sleep (100)
-			Send("{Esc}")
-			Sleep (100)
-			Send("{Esc}")
-			Sleep(100)
-			Send("{Esc}")
-			Sleep (100)
-			Send("!{F6}")
-			Sleep (300)
+			if WinExist(account.id)
+			{
+				WinActivate(account.id)
+				Sleep (100)
+				Send("{Esc}")
+				Sleep (100)
+				Send("{Esc}")
+				Sleep(100)
+				Send("{Esc}")
+				Sleep (100)
+				Send("!{F6}")
+				Sleep (300)
+			}
 		}
 	}
 }
 
 ^!m:: {  
 
-	accounts := [
+	groups := [
+	[
 		{ id: "ahk_id {{ID1}}", qty: "140" },
 		{ id: "ahk_id {{ID2}}", qty: "420" },
 		{ id: "ahk_id {{ID3}}", qty: "140" },
 		{ id: "ahk_id {{ID4}}", qty: "140" },
+	],
+	[
 		{ id: "ahk_id {{ID5}}", qty: "420" },
 		{ id: "ahk_id {{ID6}}", qty: "140" },
 		{ id: "ahk_id {{ID7}}", qty: "140" },
+	],
+	[
 		{ id: "ahk_id {{ID8}}", qty: "140" },
 		{ id: "ahk_id {{ID9}}", qty: "280" },
 		{ id: "ahk_id {{ID10}}", qty: "420" },
+	],
+	[
 		{ id: "ahk_id {{ID11}}", qty: "0" },
 		{ id: "ahk_id {{ID12}}", qty: "0" },
 		{ id: "ahk_id {{ID13}}", qty: "0" },
@@ -756,6 +844,13 @@
 		{ id: "ahk_id {{ID19}}", qty: "0" },
 		{ id: "ahk_id {{ID20}}", qty: "0" }
 	]
+	]
+
+	input 	:= InputBox("Enter the group numbers to trade (e.g. 1 3 for groups 1 and 3):", "Trade Selection")
+	if(input.Result = "Cancel" or input.Value = "")
+		ExitApp
+
+	selectedGroups	:= StrSplit(input.Value, A_Space)
 
 	number 	  := InputBox("Enter the Number of trades:", "Trade Setup").Value
 	if (number < "1" && number > "2")
@@ -785,87 +880,96 @@
 		multiplier := InputBox("Enter the Quantity Multiplier:", "Trade Setup").Value
 
 		; --- Loop through accounts ---
-		for account in accounts {
-			if WinExist(account.id) {
-				finalQty := account.qty * multiplier
-				finalQty := Round(finalQty)
-				if(Mod(finalQty, 140) != 0)
-				{
-					finalQty := Ceil(finalQty / 140) * 140
-				}
-				WinActivate(account.id)
-				Sleep (100)
-
-				Send("{Esc}")
-				Sleep(100)
-				Send("{Esc}")
-				Sleep(100)
-
-				Send("{Home}")
-				Sleep(100)
-				Send("M")
-				Sleep (100)
-		
-				Send("{F5}")
-				Sleep (300)
-				Send("{Tab}")
-				Sleep (100)
-		
-				if(expiry > 0)
-				{
-					Loop expiry
+		for _, g in selectedGroups {
+			gNum := Integer(g)
+			if(gNum < 1 or gNum > groups.length) {
+				MsgBox("Invalid Group number: " gNum)
+				continue
+			}
+			
+			; MsgBox("Executing trades for group" gNum)
+			for account in groups[gNum] {
+				if WinExist(account.id) {
+					finalQty := account.qty * multiplier
+					finalQty := Round(finalQty)
+					if(Mod(finalQty, 140) != 0)
 					{
-						Sleep (100)
-						Send("{Down}")
-						Sleep (200)
-						Send("+{Tab}")
-						Sleep (100)
+						finalQty := Ceil(finalQty / 140) * 140
 					}
-					Send("{Tab}")
-				}
-				else
-				{
-					Send("{Tab}")
-				}
-		
-				Send(strike)
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-		
-				Send(optType)
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-		
-				if (orderType = "B" or orderType = "BUY")
-				{
-					Send("{F1}")
-				}
-				else if (orderType = "S" or orderType = "SELL")
-				{
-					Send("{F2}")
-				}
-				else
-				{
-					return
-				}
-				Sleep (500)
-		
-				Send(finalQty)  
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
+					WinActivate(account.id)
+					Sleep (100)
 
-				Send(price)
-				Sleep (100)
+					Send("{Esc}")
+					Sleep(100)
+					Send("{Esc}")
+					Sleep(100)
+
+					Send("{Home}")
+					Sleep(100)
+					Send("M")
+					Sleep (100)
+			
+					Send("{F5}")
+					Sleep (300)
+					Send("{Tab}")
+					Sleep (100)
 		
-				Send("{Enter}")
-				Sleep(300)
-				Send("Y")
-				Sleep(200)
-				Send("Y")
-				Sleep(300)
+					if(expiry > 0)
+					{
+						Loop expiry
+						{
+							Sleep (100)
+							Send("{Down}")
+							Sleep (200)
+							Send("+{Tab}")
+							Sleep (100)
+						}
+						Send("{Tab}")
+					}
+					else
+					{
+						Send("{Tab}")
+					}
+			
+					Send(strike)
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+		
+					Send(optType)
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+		
+					if (orderType = "B" or orderType = "BUY")
+					{
+						Send("{F1}")
+					}
+					else if (orderType = "S" or orderType = "SELL")
+					{
+						Send("{F2}")
+					}
+					else
+					{
+						return
+					}
+					Sleep (500)
+		
+					Send(finalQty)  
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+
+					Send(price)
+					Sleep (100)
+		
+					Send("{Enter}")
+					Sleep(300)
+					Send("Y")
+					Sleep(200)
+					Send("Y")
+					Sleep(300)
+				}
 			}
 		}
 	}
@@ -912,269 +1016,331 @@
 		multiplier2 := InputBox("Enter 2nd Trade Quantity Multiplier:", "Trade Setup").Value
 
 		; --- Loop through accounts ---
-		for account in accounts {
-			if WinExist(account.id) {
-				finalQty := account.qty * multiplier
-				finalQty := Round(finalQty)
-				if(Mod(finalQty, 140) != 0)
-				{
-					finalQty := Ceil(finalQty / 140) * 140
-				}
-				finalQty2 := account.qty * multiplier2
-				finalQty2 := Round(finalQty2)
-				if(Mod(finalQty2, 140) != 0)
-				{
-					finalQty2 := Ceil(finalQty2 / 140) * 140
-				}
-				WinActivate(account.id)
-				Sleep (100)
-
-				Send("{Esc}")
-				Sleep(100)
-				Send("{Esc}")
-				Sleep(100)
-
-				Send("{Home}")
-				Sleep(100)
-				Send("M")          
-				Sleep (100)
-			
-				Send("{F5}")
-				Sleep (300)
-				Send("{Tab}")
-				Sleep (100)
-			
-				if(expiry > 0)
-				{
-					Loop expiry
+		
+		for _, g in selectedGroups {
+			gNum := Integer(g)
+			if(gNum < 1 or gNum > groups.length) {
+				MsgBox("Invalid Group number: " gNum)
+				continue
+			}
+		
+			for account in groups[gNum] {
+				if WinExist(account.id) {
+					finalQty := account.qty * multiplier
+					finalQty := Round(finalQty)
+					if(Mod(finalQty, 140) != 0)
 					{
-						Sleep (100)
-						Send("{Down}")
-						Sleep (200)
-						Send("+{Tab}")
-						Sleep (100)
+						finalQty := Ceil(finalQty / 140) * 140
 					}
-					Send("{Tab}")
-				}
-				else
-				{
-					Send("{Tab}")
-				}
-			
-				Send(strike)
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-			
-				Send(optType)
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-			
-				if (orderType = "B" or orderType = "BUY")
-				{
-					Send("{F1}")
-				}
-				else if (orderType = "S" or orderType = "SELL")
-				{
-					Send("{F2}")
-				}
-				else
-				{
-					return
-				}
-				Sleep (500)
-            
-				Send(finalQty)  
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-
-				Send(price)
-				Sleep (100)
-			
-				Send("{Enter}")
-				Sleep(300)
-				Send("Y")
-				Sleep(200)
-				Send("Y")
-				Sleep(300)
-				
-				Sleep(100)
-				
-				Send("{Esc}")
-				Sleep(100)
-				Send("{Esc}")
-				Sleep(100)
-				Send("{Esc}")
-				Sleep(100)
-				
-				Send("{Home}")
-				Sleep(100)
-				Send("M")
-				Sleep (100)
-			
-				Send("{F5}")
-				Sleep (300)
-				Send("{Tab}")
-				Sleep (100)
-			
-				if(expiry2 > 0)
-				{
-					Loop expiry2
+					finalQty2 := account.qty * multiplier2
+					finalQty2 := Round(finalQty2)
+					if(Mod(finalQty2, 140) != 0)
 					{
-						Sleep (100)
-						Send("{Down}")
-						Sleep (200)
-						Send("+{Tab}")
-						Sleep (100)
+						finalQty2 := Ceil(finalQty2 / 140) * 140
 					}
-					Send("{Tab}")
-				}
-				else
-				{
-					Send("{Tab}")
-				}
-			
-				Send(strike2)
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-			
-				Send(optType2)
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
-			
-				if (orderType2 = "B" or orderType2 = "BUY")
-				{
-					Send("{F1}")
-				}
-				else if (orderType2 = "S" or orderType2 = "SELL")
-				{
-					Send("{F2}")
-				}
-				else
-				{
-					return
-				}
-				Sleep (500)
-            
-				Send(finalQty2)  
-				Sleep (100)
-				Send("{Tab}")
-				Sleep (100)
+					WinActivate(account.id)
+					Sleep (100)
 
-				Send(price2)
-				Sleep (100)
+					Send("{Esc}")
+					Sleep(100)
+					Send("{Esc}")
+					Sleep(100)
+
+					Send("{Home}")
+					Sleep(100)
+					Send("M")          
+					Sleep (100)
 			
-				Send("{Enter}")
-				Sleep(300)
-				Send("Y")
-				Sleep(200)
-				Send("Y")
-				Sleep(300)
+					Send("{F5}")
+					Sleep (300)
+					Send("{Tab}")
+					Sleep (100)
+			
+					if(expiry > 0)
+					{
+						Loop expiry
+						{
+							Sleep (100)
+							Send("{Down}")
+							Sleep (200)
+							Send("+{Tab}")
+							Sleep (100)
+						}
+						Send("{Tab}")
+					}
+					else
+					{
+						Send("{Tab}")
+					}
+			
+					Send(strike)
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+			
+					Send(optType)
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+				
+					if (orderType = "B" or orderType = "BUY")
+					{
+						Send("{F1}")
+					}
+					else if (orderType = "S" or orderType = "SELL")
+					{
+						Send("{F2}")
+					}
+					else
+					{
+						return
+					}
+					Sleep (500)
+            
+					Send(finalQty)  
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+
+					Send(price)
+					Sleep (100)
+			
+					Send("{Enter}")
+					Sleep(300)
+					Send("Y")
+					Sleep(200)
+					Send("Y")
+					Sleep(300)
+				
+					Sleep(100)
+				
+					Send("{Esc}")
+					Sleep(100)
+					Send("{Esc}")
+					Sleep(100)
+					Send("{Esc}")
+					Sleep(100)
+				
+					Send("{Home}")
+					Sleep(100)
+					Send("M")
+					Sleep (100)
+			
+					Send("{F5}")
+					Sleep (300)
+					Send("{Tab}")
+					Sleep (100)
+			
+					if(expiry2 > 0)
+					{
+						Loop expiry2
+						{
+							Sleep (100)
+							Send("{Down}")
+							Sleep (200)
+							Send("+{Tab}")
+							Sleep (100)
+						}
+						Send("{Tab}")
+					}
+					else
+					{
+						Send("{Tab}")
+					}
+			
+					Send(strike2)
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+			
+					Send(optType2)
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+			
+					if (orderType2 = "B" or orderType2 = "BUY")
+					{
+						Send("{F1}")
+					}
+					else if (orderType2 = "S" or orderType2 = "SELL")
+					{
+						Send("{F2}")
+					}
+					else
+					{
+						return
+					}
+					Sleep (500)
+            
+					Send(finalQty2)  
+					Sleep (100)
+					Send("{Tab}")
+					Sleep (100)
+
+					Send(price2)
+					Sleep (100)
+			
+					Send("{Enter}")
+					Sleep(300)
+					Send("Y")
+					Sleep(200)
+					Send("Y")
+					Sleep(300)
+				}
 			}
 		}
 	}
 	
-	for account in accounts
-	{
-		if WinExist(account.id)
+	for _, g in selectedGroups {
+			gNum := Integer(g)
+			if(gNum < 1 or gNum > groups.length) {
+				MsgBox("Invalid Group number: " gNum)
+				continue
+			}
+	
+		for account in groups[gNum]
 		{
-			WinActivate(account.id)
-			Sleep (100)
-			Send("{Esc}")
-			Sleep (100)
-			Send("{Esc}")
-			Sleep(100)
-			Send("{Esc}")
-			Sleep (100)
-			Send("!{F6}")
-			Sleep (300)
+			if WinExist(account.id)
+			{
+				WinActivate(account.id)
+				Sleep (100)
+				Send("{Esc}")
+				Sleep (100)
+				Send("{Esc}")
+				Sleep(100)
+				Send("{Esc}")
+				Sleep (100)
+				Send("!{F6}")
+				Sleep (300)
+			}
 		}
 	}
 }
 
 ^!i:: {
-	accounts := [
-		{ id: "ahk_id {{ID1}}", qty: "140" },
-		{ id: "ahk_id {{ID2}}", qty: "420" },
-		{ id: "ahk_id {{ID3}}", qty: "140" },
-		{ id: "ahk_id {{ID4}}", qty: "140" },
-		{ id: "ahk_id {{ID5}}", qty: "420" },
-		{ id: "ahk_id {{ID6}}", qty: "140" },
-		{ id: "ahk_id {{ID7}}", qty: "140" },
-		{ id: "ahk_id {{ID8}}", qty: "140" },
-		{ id: "ahk_id {{ID9}}", qty: "280" },
-		{ id: "ahk_id {{ID10}}", qty: "420" },
-		{ id: "ahk_id {{ID11}}", qty: "0" },
-		{ id: "ahk_id {{ID12}}", qty: "0" },
-		{ id: "ahk_id {{ID13}}", qty: "0" },
-		{ id: "ahk_id {{ID14}}", qty: "0" },
-		{ id: "ahk_id {{ID15}}", qty: "0" },
-		{ id: "ahk_id {{ID16}}", qty: "0" },
-		{ id: "ahk_id {{ID17}}", qty: "0" },
-		{ id: "ahk_id {{ID18}}", qty: "0" },
-		{ id: "ahk_id {{ID19}}", qty: "0" },
-		{ id: "ahk_id {{ID20}}", qty: "0" }
+	groups := [
+	[
+		{ id: "ahk_id {{ID1}}", qty: "525" },
+		{ id: "ahk_id {{ID2}}", qty: "1575" },
+		{ id: "ahk_id {{ID3}}", qty: "525" },
+		{ id: "ahk_id {{ID4}}", qty: "525" },
+	],
+	[
+		{ id: "ahk_id {{ID5}}", qty: "1575" },
+		{ id: "ahk_id {{ID6}}", qty: "525" },
+		{ id: "ahk_id {{ID7}}", qty: "150" },
+	],
+	[
+		{ id: "ahk_id {{ID8}}", qty: "525" },
+		{ id: "ahk_id {{ID9}}", qty: "1050" },
+		{ id: "ahk_id {{ID10}}", qty: "2700" },
+	],
+	[
+		{ id: "ahk_id {{ID11}}", qty: "375" },
+		{ id: "ahk_id {{ID12}}", qty: "375" },
+		{ id: "ahk_id {{ID13}}", qty: "225" },
+		{ id: "ahk_id {{ID14}}", qty: "150" },
+		{ id: "ahk_id {{ID15}}", qty: "150" },
+		{ id: "ahk_id {{ID16}}", qty: "150" },
+		{ id: "ahk_id {{ID17}}", qty: "75" },
+		{ id: "ahk_id {{ID18}}", qty: "75" },
+		{ id: "ahk_id {{ID19}}", qty: "75" },
+		{ id: "ahk_id {{ID20}}", qty: "75" }
 	]
-	for account in accounts
-	{
-		if WinExist(account.id)
+	]
+
+	input 	:= InputBox("Enter the group numbers to trade (e.g. 1 3 for groups 1 and 3):", "Trade Selection")
+	if(input.Result = "Cancel" or input.Value = "")
+		ExitApp
+
+	selectedGroups	:= StrSplit(input.Value, A_Space)
+
+	for _, g in selectedGroups {
+			gNum := Integer(g)
+			if(gNum < 1 or gNum > groups.length) {
+				MsgBox("Invalid Group number: " gNum)
+				continue
+			}
+
+		for account in groups[gNum]
 		{
-			WinActivate(account.id)
-			Sleep(100)
-			Send("{Esc}")
-			Sleep(100)
-			Send("{Esc}")
-			Sleep(100)
-			Send("{Esc}")
-			Sleep(100)
-			Send("!{F6}")
-			Sleep(300)
+			if WinExist(account.id)
+			{
+				WinActivate(account.id)
+				Sleep(100)
+				Send("{Esc}")
+				Sleep(100)
+				Send("{Esc}")
+				Sleep(100)
+				Send("{Esc}")
+				Sleep(100)
+				Send("!{F6}")
+				Sleep(300)
+			}
 		}
 	}
 }
 
 ^!c:: {
 
-	accounts := [
-		{ id: "ahk_id {{ID1}}", qty: "140" },
-		{ id: "ahk_id {{ID2}}", qty: "420" },
-		{ id: "ahk_id {{ID3}}", qty: "140" },
-		{ id: "ahk_id {{ID4}}", qty: "140" },
-		{ id: "ahk_id {{ID5}}", qty: "420" },
-		{ id: "ahk_id {{ID6}}", qty: "140" },
-		{ id: "ahk_id {{ID7}}", qty: "140" },
-		{ id: "ahk_id {{ID8}}", qty: "140" },
-		{ id: "ahk_id {{ID9}}", qty: "280" },
-		{ id: "ahk_id {{ID10}}", qty: "420" },
-		{ id: "ahk_id {{ID11}}", qty: "0" },
-		{ id: "ahk_id {{ID12}}", qty: "0" },
-		{ id: "ahk_id {{ID13}}", qty: "0" },
-		{ id: "ahk_id {{ID14}}", qty: "0" },
-		{ id: "ahk_id {{ID15}}", qty: "0" },
-		{ id: "ahk_id {{ID16}}", qty: "0" },
-		{ id: "ahk_id {{ID17}}", qty: "0" },
-		{ id: "ahk_id {{ID18}}", qty: "0" },
-		{ id: "ahk_id {{ID19}}", qty: "0" },
-		{ id: "ahk_id {{ID20}}", qty: "0" }
+	groups := [
+	[
+		{ id: "ahk_id {{ID1}}", qty: "525" },
+		{ id: "ahk_id {{ID2}}", qty: "1575" },
+		{ id: "ahk_id {{ID3}}", qty: "525" },
+		{ id: "ahk_id {{ID4}}", qty: "525" },
+	],
+	[
+		{ id: "ahk_id {{ID5}}", qty: "1575" },
+		{ id: "ahk_id {{ID6}}", qty: "525" },
+		{ id: "ahk_id {{ID7}}", qty: "150" },
+	],
+	[
+		{ id: "ahk_id {{ID8}}", qty: "525" },
+		{ id: "ahk_id {{ID9}}", qty: "1050" },
+		{ id: "ahk_id {{ID10}}", qty: "2700" },
+	],
+	[
+		{ id: "ahk_id {{ID11}}", qty: "375" },
+		{ id: "ahk_id {{ID12}}", qty: "375" },
+		{ id: "ahk_id {{ID13}}", qty: "225" },
+		{ id: "ahk_id {{ID14}}", qty: "150" },
+		{ id: "ahk_id {{ID15}}", qty: "150" },
+		{ id: "ahk_id {{ID16}}", qty: "150" },
+		{ id: "ahk_id {{ID17}}", qty: "75" },
+		{ id: "ahk_id {{ID18}}", qty: "75" },
+		{ id: "ahk_id {{ID19}}", qty: "75" },
+		{ id: "ahk_id {{ID20}}", qty: "75" }
 	]
-	for account in accounts
-	{
-		if WinExist(account.id)
+	]
+
+	input 	:= InputBox("Enter the group numbers to trade (e.g. 1 3 for groups 1 and 3):", "Trade Selection")
+	if(input.Result = "Cancel" or input.Value = "")
+		ExitApp
+
+	selectedGroups	:= StrSplit(input.Value, A_Space)
+
+	for _, g in selectedGroups {
+			gNum := Integer(g)
+			if(gNum < 1 or gNum > groups.length) {
+				MsgBox("Invalid Group number: " gNum)
+				continue
+			}
+
+		for account in groups[gNum]
 		{
-			WinActivate(account.id)
-			Sleep (100)
-			Send("{Esc}")
-			Sleep (100)
-			Send("{Esc}")
-			Sleep(100)
-			Send("{Esc}")
-			Sleep(100)
-			Send("{Home}")
+			if WinExist(account.id)
+			{
+				WinActivate(account.id)
+				Sleep (100)
+				Send("{Esc}")
+				Sleep (100)
+				Send("{Esc}")
+				Sleep(100)
+				Send("{Esc}")
+				Sleep(100)
+				Send("{Home}")
+			}
 		}
 	}
 }
-
