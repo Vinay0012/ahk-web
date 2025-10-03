@@ -41,7 +41,9 @@
 	if(input.Result = "Cancel" or input.Value = "")
 		ExitApp
 
-	selectedGroups	:= StrSplit(input.Value, A_Space)
+	selectedGroups := StrSplit(Trim(input.Value), A_Space "," "`t")
+	selectedGroups := selectedGroups.Filter(val => val != "")
+
 
 	number 	  := InputBox("Enter the Number of trades:", "Trade Setup").Value
 	if (number < "1" && number > "2")
@@ -445,7 +447,9 @@
 	if(input.Result = "Cancel" or input.Value = "")
 		ExitApp
 
-	selectedGroups	:= StrSplit(input.Value, A_Space)
+	selectedGroups := StrSplit(Trim(input.Value), A_Space "," "`t")
+	selectedGroups := selectedGroups.Filter(val => val != "")
+
 
 	number 	  := InputBox("Enter the Number of trades:", "Trade Setup").Value
 	if (number < "1" && number > "2")
@@ -850,7 +854,9 @@
 	if(input.Result = "Cancel" or input.Value = "")
 		ExitApp
 
-	selectedGroups	:= StrSplit(input.Value, A_Space)
+	selectedGroups := StrSplit(Trim(input.Value), A_Space "," "`t")
+	selectedGroups := selectedGroups.Filter(val => val != "")
+
 
 	number 	  := InputBox("Enter the Number of trades:", "Trade Setup").Value
 	if (number < "1" && number > "2")
@@ -1253,7 +1259,9 @@
 	if(input.Result = "Cancel" or input.Value = "")
 		ExitApp
 
-	selectedGroups	:= StrSplit(input.Value, A_Space)
+	selectedGroups := StrSplit(Trim(input.Value), A_Space "," "`t")
+	selectedGroups := selectedGroups.Filter(val => val != "")
+
 
 	for _, g in selectedGroups {
 			gNum := Integer(g)
@@ -1318,7 +1326,9 @@
 	if(input.Result = "Cancel" or input.Value = "")
 		ExitApp
 
-	selectedGroups	:= StrSplit(input.Value, A_Space)
+	selectedGroups := StrSplit(Trim(input.Value), A_Space "," "`t")
+	selectedGroups := selectedGroups.Filter(val => val != "")
+
 
 	for _, g in selectedGroups {
 			gNum := Integer(g)
