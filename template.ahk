@@ -42,7 +42,13 @@
 		ExitApp
 
 	selectedGroups := StrSplit(Trim(input.Value), A_Space "," "`t")
-	selectedGroups := selectedGroups.Filter(val => val != "")
+
+	; clean out empty values
+	cleanGroups := []
+	for _, g in selectedGroups {
+    if (Trim(g) != "")
+       	cleanGroups.Push(g)
+	}
 
 
 	number 	  := InputBox("Enter the Number of trades:", "Trade Setup").Value
@@ -73,7 +79,7 @@
 		multiplier := InputBox("Enter the Quantity Multiplier:", "Trade Setup").Value
 
 		; --- Loop through groups and accounts ---
-		for _, g in selectedGroups {
+		for _, g in cleanGroups {
 			gNum := Integer(g)
 			if(gNum < 1 or gNum > groups.length) {
 				MsgBox("Invalid Group number: " gNum)
@@ -209,7 +215,7 @@
 		multiplier2 := InputBox("Enter 2nd Trade Quantity Multiplier:", "Trade Setup").Value
 
 		; --- Loop through accounts ---
-		for _, g in selectedGroups {
+		for _, g in cleanGroups {
 			gNum := Integer(g)
 			if(gNum < 1 or gNum > groups.length) {
 				MsgBox("Invalid Group number: " gNum)
@@ -383,7 +389,7 @@
 		}
 	}
 	
-	for _, g in selectedGroups {
+	for _, g in cleanGroups {
 			gNum := Integer(g)
 			if(gNum < 1 or gNum > groups.length) {
 				MsgBox("Invalid Group number: " gNum)
@@ -448,7 +454,13 @@
 		ExitApp
 
 	selectedGroups := StrSplit(Trim(input.Value), A_Space "," "`t")
-	selectedGroups := selectedGroups.Filter(val => val != "")
+	
+	; clean out empty values
+	cleanGroups := []
+	for _, g in selectedGroups {
+    if (Trim(g) != "")
+       	cleanGroups.Push(g)
+	}
 
 
 	number 	  := InputBox("Enter the Number of trades:", "Trade Setup").Value
@@ -480,7 +492,7 @@
 
 		; --- Loop through accounts ---
 		
-		for _, g in selectedGroups {
+		for _, g in cleanGroups {
 			gNum := Integer(g)
 			if(gNum < 1 or gNum > groups.length) {
 				MsgBox("Invalid Group number: " gNum)
@@ -617,7 +629,7 @@
 
 		; --- Loop through accounts ---
 		
-		for _, g in selectedGroups {
+		for _, g in cleanGroups {
 			gNum := Integer(g)
 			if(gNum < 1 or gNum > groups.length) {
 				MsgBox("Invalid Group number: " gNum)
@@ -791,7 +803,7 @@
 		}
 	} 
 	
-	for _, g in selectedGroups {
+	for _, g in cleanGroups {
 			gNum := Integer(g)
 			if(gNum < 1 or gNum > groups.length) {
 				MsgBox("Invalid Group number: " gNum)
@@ -855,7 +867,13 @@
 		ExitApp
 
 	selectedGroups := StrSplit(Trim(input.Value), A_Space "," "`t")
-	selectedGroups := selectedGroups.Filter(val => val != "")
+	
+	; clean out empty values
+	cleanGroups := []
+	for _, g in selectedGroups {
+    if (Trim(g) != "")
+       	cleanGroups.Push(g)
+	}
 
 
 	number 	  := InputBox("Enter the Number of trades:", "Trade Setup").Value
@@ -886,7 +904,7 @@
 		multiplier := InputBox("Enter the Quantity Multiplier:", "Trade Setup").Value
 
 		; --- Loop through accounts ---
-		for _, g in selectedGroups {
+		for _, g in cleanGroups {
 			gNum := Integer(g)
 			if(gNum < 1 or gNum > groups.length) {
 				MsgBox("Invalid Group number: " gNum)
@@ -1023,7 +1041,7 @@
 
 		; --- Loop through accounts ---
 		
-		for _, g in selectedGroups {
+		for _, g in cleanGroups {
 			gNum := Integer(g)
 			if(gNum < 1 or gNum > groups.length) {
 				MsgBox("Invalid Group number: " gNum)
@@ -1197,7 +1215,7 @@
 		}
 	}
 	
-	for _, g in selectedGroups {
+	for _, g in cleanGroups {
 			gNum := Integer(g)
 			if(gNum < 1 or gNum > groups.length) {
 				MsgBox("Invalid Group number: " gNum)
@@ -1260,10 +1278,16 @@
 		ExitApp
 
 	selectedGroups := StrSplit(Trim(input.Value), A_Space "," "`t")
-	selectedGroups := selectedGroups.Filter(val => val != "")
-
-
+	
+	; clean out empty values
+	cleanGroups := []
 	for _, g in selectedGroups {
+    if (Trim(g) != "")
+       	cleanGroups.Push(g)
+	}
+
+
+	for _, g in cleanGroups {
 			gNum := Integer(g)
 			if(gNum < 1 or gNum > groups.length) {
 				MsgBox("Invalid Group number: " gNum)
@@ -1327,10 +1351,16 @@
 		ExitApp
 
 	selectedGroups := StrSplit(Trim(input.Value), A_Space "," "`t")
-	selectedGroups := selectedGroups.Filter(val => val != "")
-
-
+	
+	; clean out empty values
+	cleanGroups := []
 	for _, g in selectedGroups {
+    if (Trim(g) != "")
+       	cleanGroups.Push(g)
+	}
+
+
+	for _, g in cleanGroups {
 			gNum := Integer(g)
 			if(gNum < 1 or gNum > groups.length) {
 				MsgBox("Invalid Group number: " gNum)
