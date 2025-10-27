@@ -18,6 +18,8 @@ const REPO_OWNER = "Vinay0012";
 const REPO_NAME = "office";
 const WORKFLOW_FILE = "version5.yml";
 
+console.log("Token Present:", !!GITHUB_TOKEN);
+
 const octokit = new Octokit({ auth: GITHUB_TOKEN });
 
 app.post("/generate", upload.none(), async (req, res) => {
@@ -110,7 +112,7 @@ app.post("/generate", upload.none(), async (req, res) => {
 
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error generating EXE.");
+    res.status(500).send(err.message);
   }
 });
 
