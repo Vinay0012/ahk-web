@@ -24,16 +24,16 @@
 		{ id: "ahk_id {{ID10}}", qty: "2700" },
 	],
 	[
-		{ id: "ahk_id {{ID11}}", qty: "375" },
-		{ id: "ahk_id {{ID12}}", qty: "375" },
-		{ id: "ahk_id {{ID13}}", qty: "225" },
-		{ id: "ahk_id {{ID14}}", qty: "150" },
-		{ id: "ahk_id {{ID15}}", qty: "150" },
-		{ id: "ahk_id {{ID16}}", qty: "150" },
-		{ id: "ahk_id {{ID17}}", qty: "75" },
-		{ id: "ahk_id {{ID18}}", qty: "75" },
-		{ id: "ahk_id {{ID19}}", qty: "75" },
-		{ id: "ahk_id {{ID20}}", qty: "75" }
+		{ id: "ahk_id {{ID11}}", qty: "390" },
+		{ id: "ahk_id {{ID12}}", qty: "390" },
+		{ id: "ahk_id {{ID13}}", qty: "260" },
+		{ id: "ahk_id {{ID14}}", qty: "195" },
+		{ id: "ahk_id {{ID15}}", qty: "195" },
+		{ id: "ahk_id {{ID16}}", qty: "195" },
+		{ id: "ahk_id {{ID17}}", qty: "130" },
+		{ id: "ahk_id {{ID18}}", qty: "130" },
+		{ id: "ahk_id {{ID19}}", qty: "130" },
+		{ id: "ahk_id {{ID20}}", qty: "130" }
 	]
 	]
 
@@ -428,16 +428,16 @@
 		{ id: "ahk_id {{ID10}}", qty: "875" },
 	],
 	[
-		{ id: "ahk_id {{ID11}}", qty: "35" },
-		{ id: "ahk_id {{ID12}}", qty: "35" },
-		{ id: "ahk_id {{ID13}}", qty: "35" },
-		{ id: "ahk_id {{ID14}}", qty: "35" },
-		{ id: "ahk_id {{ID15}}", qty: "35" },
-		{ id: "ahk_id {{ID16}}", qty: "35" },
-		{ id: "ahk_id {{ID17}}", qty: "35" },
-		{ id: "ahk_id {{ID18}}", qty: "35" },
-		{ id: "ahk_id {{ID19}}", qty: "35" },
-		{ id: "ahk_id {{ID20}}", qty: "35" }
+		{ id: "ahk_id {{ID11}}", qty: "30" },
+		{ id: "ahk_id {{ID12}}", qty: "30" },
+		{ id: "ahk_id {{ID13}}", qty: "30" },
+		{ id: "ahk_id {{ID14}}", qty: "30" },
+		{ id: "ahk_id {{ID15}}", qty: "30" },
+		{ id: "ahk_id {{ID16}}", qty: "30" },
+		{ id: "ahk_id {{ID17}}", qty: "30" },
+		{ id: "ahk_id {{ID18}}", qty: "30" },
+		{ id: "ahk_id {{ID19}}", qty: "30" },
+		{ id: "ahk_id {{ID20}}", qty: "30" }
 	]
 	]
 
@@ -1236,16 +1236,16 @@
 		{ id: "ahk_id {{ID10}}", qty: "2700" },
 	],
 	[
-		{ id: "ahk_id {{ID11}}", qty: "375" },
-		{ id: "ahk_id {{ID12}}", qty: "375" },
-		{ id: "ahk_id {{ID13}}", qty: "225" },
-		{ id: "ahk_id {{ID14}}", qty: "150" },
-		{ id: "ahk_id {{ID15}}", qty: "150" },
-		{ id: "ahk_id {{ID16}}", qty: "150" },
-		{ id: "ahk_id {{ID17}}", qty: "75" },
-		{ id: "ahk_id {{ID18}}", qty: "75" },
-		{ id: "ahk_id {{ID19}}", qty: "75" },
-		{ id: "ahk_id {{ID20}}", qty: "75" }
+		{ id: "ahk_id {{ID11}}", qty: "390" },
+		{ id: "ahk_id {{ID12}}", qty: "390" },
+		{ id: "ahk_id {{ID13}}", qty: "260" },
+		{ id: "ahk_id {{ID14}}", qty: "195" },
+		{ id: "ahk_id {{ID15}}", qty: "195" },
+		{ id: "ahk_id {{ID16}}", qty: "195" },
+		{ id: "ahk_id {{ID17}}", qty: "130" },
+		{ id: "ahk_id {{ID18}}", qty: "130" },
+		{ id: "ahk_id {{ID19}}", qty: "130" },
+		{ id: "ahk_id {{ID20}}", qty: "130" }
 	]
 	]
 
@@ -1301,16 +1301,16 @@
 		{ id: "ahk_id {{ID10}}", qty: "2700" },
 	],
 	[
-		{ id: "ahk_id {{ID11}}", qty: "375" },
-		{ id: "ahk_id {{ID12}}", qty: "375" },
-		{ id: "ahk_id {{ID13}}", qty: "225" },
-		{ id: "ahk_id {{ID14}}", qty: "150" },
-		{ id: "ahk_id {{ID15}}", qty: "150" },
-		{ id: "ahk_id {{ID16}}", qty: "150" },
-		{ id: "ahk_id {{ID17}}", qty: "75" },
-		{ id: "ahk_id {{ID18}}", qty: "75" },
-		{ id: "ahk_id {{ID19}}", qty: "75" },
-		{ id: "ahk_id {{ID20}}", qty: "75" }
+		{ id: "ahk_id {{ID11}}", qty: "390" },
+		{ id: "ahk_id {{ID12}}", qty: "390" },
+		{ id: "ahk_id {{ID13}}", qty: "260" },
+		{ id: "ahk_id {{ID14}}", qty: "195" },
+		{ id: "ahk_id {{ID15}}", qty: "195" },
+		{ id: "ahk_id {{ID16}}", qty: "195" },
+		{ id: "ahk_id {{ID17}}", qty: "130" },
+		{ id: "ahk_id {{ID18}}", qty: "130" },
+		{ id: "ahk_id {{ID19}}", qty: "130" },
+		{ id: "ahk_id {{ID20}}", qty: "130" }
 	]
 	]
 
