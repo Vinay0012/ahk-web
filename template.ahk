@@ -91,9 +91,9 @@
 				if WinExist(account.id) {
 					finalQty := account.qty * multiplier
 					finalQty := Round(finalQty)
-					if(Mod(finalQty, 75) != 0)
+					if(Mod(finalQty, 65) != 0)
 					{
-						finalQty := Ceil(finalQty / 75) * 75
+						finalQty := Ceil(finalQty / 65) * 65
 					}
 					WinActivate(account.id)
 					Sleep (100)
@@ -226,15 +226,15 @@
 				if WinExist(account.id) {
 					finalQty := account.qty * multiplier
 					finalQty := Round(finalQty)
-					if(Mod(finalQty, 75) != 0)
+					if(Mod(finalQty, 65) != 0)
 					{
-						finalQty := Ceil(finalQty / 75) * 75
+						finalQty := Ceil(finalQty / 65) * 65
 					}
 					finalQty2 := account.qty * multiplier2
 					finalQty2 := Round(finalQty2)
-					if(Mod(finalQty2, 75) != 0)
+					if(Mod(finalQty2, 65) != 0)
 					{
-						finalQty2 := Ceil(finalQty2 / 75) * 75
+						finalQty2 := Ceil(finalQty2 / 65) * 65
 					}
 					WinActivate(account.id)
 					Sleep (100)
@@ -504,9 +504,9 @@
 				if WinExist(account.id) {
 					finalQty := account.qty * multiplier
 					finalQty := Round(finalQty)
-					if(Mod(finalQty, 35) != 0)
+					if(Mod(finalQty, 30) != 0)
 					{
-						finalQty := Ceil(finalQty / 35) * 35
+						finalQty := Ceil(finalQty / 30) * 30
 					}
 					WinActivate(account.id)
 					Sleep (100)
@@ -640,15 +640,15 @@
 				if WinExist(account.id) {
 					finalQty := account.qty * multiplier
 					finalQty := Round(finalQty)
-					if(Mod(finalQty, 35) != 0)
+					if(Mod(finalQty, 30) != 0)
 					{
-						finalQty := Ceil(finalQty / 35) * 35
+						finalQty := Ceil(finalQty / 30) * 30
 					}
 					finalQty2 := account.qty * multiplier2
 					finalQty2 := Round(finalQty2)
-					if(Mod(finalQty2, 35) != 0)
+					if(Mod(finalQty2, 30) != 0)
 					{
-						finalQty2 := Ceil(finalQty2 / 35) * 35
+						finalQty2 := Ceil(finalQty2 / 30) * 30
 					}
 					WinActivate(account.id)
 					Sleep (100)
